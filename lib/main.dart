@@ -18,35 +18,25 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //TODO: Tirar routes a un método.
     final routes = GoRouter(
-        routes: Routes.values
-            .map((e) => GoRoute(
-                  path: e.path,
-                  builder: (context, state) => e.screenWidget,
-                ))
-            .toList());
-
+      routes: Routes.values
+          .map((route) => GoRoute(
+                path: route.path,
+                builder: (context, state) => route.screenWidget,
+              ))
+          .toList(),
+    );
     return MaterialApp.router(
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.grey.shade100),
       routerConfig: routes,
     );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('title').tr();
   }
 }
