@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/utils/router.dart';
+import 'package:perros_sos/utils/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    //TODO: Tirar routes a un método.
     final routes = GoRouter(
+      initialLocation: "/",
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,

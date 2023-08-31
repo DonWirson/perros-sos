@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "perros_sos",
+            "name": "app",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "perros_sos (profile mode)",
+            "name": "app (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "perros_sos (release mode)",
+            "name": "app (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

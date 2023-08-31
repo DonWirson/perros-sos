@@ -1,13 +1,16 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perros_sos/utils/generic_scaffold.dart';
 
-class Landing extends StatelessWidget {
-  const Landing({super.key});
+class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    void loginScreen() => context.go('/login');
+
     return GenericScaffold(
       showBottomBar: false,
       bodyWidget: Column(
@@ -34,7 +37,7 @@ class Landing extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: loginScreen,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,
               ),
