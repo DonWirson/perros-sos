@@ -9,7 +9,7 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void loginScreen() => context.go('/login');
+    void navigateToLoginScreen() => context.goNamed('login');
 
     return GenericScaffold(
       showBottomBar: false,
@@ -37,7 +37,7 @@ class LandingPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ElevatedButton(
-              onPressed: loginScreen,
+              onPressed: navigateToLoginScreen,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,
               ),

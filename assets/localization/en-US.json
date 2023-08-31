@@ -1,5 +1,14 @@
 {
-    "title": "SOS DOGS",
+    "title": "SOS Dogs (name pending)",
     "confirm": "confirm",
-    "landing_title": "Please select your country"
+    "landing_title": "title",
+    "login_username": "Enter your username",
+    "login_password": "Enter your password",
+    "login_success": "Successful login",
+    "login_error": "Login error",
+    "missing_account": "Don't have an account yet? Sign up",
+    "register_username": "Enter your username",
+    "register_password": "Enter your password",
+    "register_success": "Created account successfully",
+    "register_error": "Error creating account"
 }

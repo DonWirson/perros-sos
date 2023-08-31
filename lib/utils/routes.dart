@@ -5,7 +5,7 @@ import 'package:perros_sos/views/views.dart';
 enum Routes {
   landing(name: "landing", path: "/", screenWidget: LandingPage()),
   login(name: "login", path: "/login", screenWidget: LoginPage()),
-  register(name: "register", path: "/register", screenWidget: Center());
+  register(name: "register", path: "/register", screenWidget: RegisterPage());
 
   //No utilizado para que constructor de main siga como const
   GoRouter get getRoutes {
@@ -14,6 +14,7 @@ enum Routes {
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,
+                name: route.name,
                 builder: (context, state) => route.screenWidget,
               ))
           .toList(),

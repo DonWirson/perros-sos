@@ -6,6 +6,7 @@ import 'package:perros_sos/utils/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('es', 'CL')],
@@ -20,11 +21,13 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    //Rutas se van a buscar acá para que constructor quede const.
     final routes = GoRouter(
       initialLocation: "/",
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,
+                name: route.name,
                 builder: (context, state) => route.screenWidget,
               ))
           .toList(),
