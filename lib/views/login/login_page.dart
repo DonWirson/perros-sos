@@ -3,15 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perros_sos/utils/generic_scaffold.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return GenericScaffold(
       showBottomBar: false,
       bodyWidget: Column(
         children: [
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => context.pushNamed("register"),
+                    child: const Text("missing_account").tr(),
+                  )
+                ],
+              ))
           // TextFormField(
           //   decoration: const InputDecoration(
           //     border: UnderlineInputBorder(),
@@ -24,9 +40,6 @@ class LoginPage extends StatelessWidget {
           //     labelText: 'Ingresa tu contraseña',
           //   ),
           // ),
-          ElevatedButton(
-              onPressed: () => context.pushNamed("register"),
-              child: const Text("missing_account").tr())
         ],
       ),
     );

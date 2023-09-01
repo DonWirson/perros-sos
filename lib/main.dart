@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Rutas se van a buscar acá para que constructor quede const.
     final routes = GoRouter(
-      initialLocation: "/",
+      initialLocation: "/login",
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,

@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 
 class GenericScaffold extends StatelessWidget {
   const GenericScaffold(
-      {required this.bodyWidget, this.showBottomBar = true, super.key});
+      {required this.bodyWidget,
+      this.showBottomBar = true,
+      this.showAppBar = true,
+      super.key});
 
   final Widget bodyWidget;
   final bool showBottomBar;
+  final bool showAppBar;
   @override
   Widget build(BuildContext context) {
     int selectedIndex = 0;
     return Scaffold(
+      appBar: !showAppBar ? null : AppBar(elevation: 2.0),
       //Body cambia por cada vista
       body: Padding(
         padding: const EdgeInsets.all(20.0),
