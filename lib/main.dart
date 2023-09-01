@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/utils/routes.dart';
+import 'utils/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Rutas se van a buscar acá para que constructor quede const.
     final routes = GoRouter(
-      initialLocation: "/",
+      initialLocation: "/login",
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,

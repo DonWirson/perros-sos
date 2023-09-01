@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perros_sos/utils/generic_scaffold.dart';
+import '../../utils/generic_scaffold.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
