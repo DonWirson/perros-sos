@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/utils/generic_scaffold.dart';
+import '../../utils/generic_scaffold.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
