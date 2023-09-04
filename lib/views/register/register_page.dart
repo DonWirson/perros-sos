@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/generic_scaffold.dart';
 
 class RegisterPage extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'generic_bottom_bar.dart';
+import 'generic_appbar.dart';
 
 class GenericScaffold extends StatelessWidget {
   const GenericScaffold(
@@ -17,25 +18,11 @@ class GenericScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
     return Scaffold(
-      appBar: !showAppBar
-          ? null
-          : AppBar(
-              title: title == null ? null : const Text(""),
-              //muestra backbutton en caso de ser posible hacer pop
-              leading: context.canPop()
-                  ? IconButton(
-                      icon: const Icon(Icons.arrow_back_ios),
-                      onPressed: () => context.pop(),
-                    )
-                  : null,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () => context.goNamed("settings"),
-                ),
-              ],
-              elevation: 2.0,
-            ),
+      appBar: showAppBar
+          ? GenericAppBar(
+              title: title,
+            )
+          : null,
       //bodyWidget cambia por cada vista
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -51,27 +38,11 @@ class GenericScaffold extends StatelessWidget {
           ),
         ),
       ),
-      //Navigation bar se usa en la mayoría de vistas
-      bottomNavigationBar: !showBottomBar
-          ? null
-          : BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
-                  label: 'School',
-                ),
-              ],
-              currentIndex: selectedIndex,
-              selectedItemColor: Colors.amber[800],
-            ),
+      bottomNavigationBar: showBottomBar
+          ? GenericBottomBar(
+              selectedIndex: selectedIndex,
+            )
+          : null,
     );
   }
 }
