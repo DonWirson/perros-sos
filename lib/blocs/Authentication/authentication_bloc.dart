@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -27,5 +30,15 @@ class AuthenticationBloc
   Future<void> _registerStarted(
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     emit(RegisterInProgress());
+    try {
+      GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+        ],
+      );
+      await googleSignIn.signIn();
+    } catch (e) {
+      log("Sign in failed :C");
+    }
   }
 }
