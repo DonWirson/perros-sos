@@ -1,13 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'utils/routes.dart';
 
 void main() async {
+  //Config de diccionario
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  //Confi de GoRouter
   GoRouter.optionURLReflectsImperativeAPIs = true;
+  //Config de firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('es', 'CL')],
