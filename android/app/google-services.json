@@ -12,7 +12,12 @@
           "package_name": "com.donwirson.perros_sos"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "383597021083-mdqt0k8nfkcv5fg2bgg25v66mdjj9k5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDKXL9hqOpxTuFDFywmItcO-53VSL0NeoE"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383597021083-mdqt0k8nfkcv5fg2bgg25v66mdjj9k5q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "383597021083-kc13128i8eda77cg9fik5e0l47g4ss00.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.perrosSos"
+              }
+            }
+          ]
         }
       }
     }
