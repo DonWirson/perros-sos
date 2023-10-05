@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 part 'authentication_event.dart';
@@ -31,14 +32,20 @@ class AuthenticationBloc
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     emit(RegisterInProgress());
     try {
-      GoogleSignIn googleSignIn = GoogleSignIn(
-        scopes: [
-          'email',
-        ],
-      );
+      GoogleSignIn googleSignIn = GoogleSignIn();
       await googleSignIn.signIn();
+      //Guarda credenciales en local storage encriptado
+      AndroidOptions _getAndroidOptions() => const AndroidOptions(
+            encryptedSharedPreferences: true,
+          );
+      final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+
+      storage.write(key: "registerGoogle", value: googleSignIn.clientId);
+
+      var atata = storage.read(key: "registerGoogle");
+      print(atata);
     } catch (e) {
-      log("Sign in failed :C");
+      print("Sign in failed :C");
     }
   }
 }
