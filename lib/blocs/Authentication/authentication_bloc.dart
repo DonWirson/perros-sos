@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -30,22 +32,20 @@ class AuthenticationBloc
 
   Future<void> _registerStarted(
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
-    emit(RegisterInProgress());
     try {
-      GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.signIn();
-      //Guarda credenciales en local storage encriptado
-      AndroidOptions _getAndroidOptions() => const AndroidOptions(
-            encryptedSharedPreferences: true,
-          );
-      final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-
-      storage.write(key: "registerGoogle", value: googleSignIn.clientId);
-
-      var atata = storage.read(key: "registerGoogle");
-      print(atata);
+      emit(RegisterInProgress());
+      final response = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: "twilliamson.valdes@gmail.com", password: "atata123");
+      emit(
+        RegisterSuccessfull(),
+      );
     } catch (e) {
-      print("Sign in failed :C");
+      emit(
+        RegisterFailure(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }
