@@ -17,19 +17,16 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return GenericScaffold(
       showBottomBar: false,
-      bodyWidget: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            if (state is RegisterSuccessfull) {
-              Fluttertoast.showToast(
-                  msg: "REGISTRO EXITOSO!", timeInSecForIosWeb: 2);
-              //Despues de mostrar el mensaje redirigir a pagina de landing.....
-            }
-          },
-          child: const RegisterForm(),
-        ),
+      bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          if (state is RegisterSuccessfull) {
+            Fluttertoast.showToast(
+                msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
+            //Despues de mostrar el mensaje redirigir a pagina de landing.....
+            Future.delayed(const Duration(seconds: 2)).then((value) => null);
+          }
+        },
+        child: const RegisterForm(),
       ),
     );
   }
