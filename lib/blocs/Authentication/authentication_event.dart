@@ -9,4 +9,11 @@ sealed class AuthenticationEvent extends Equatable {
 
 final class LoginStarted extends AuthenticationEvent {}
 
-final class RegisterStarted extends AuthenticationEvent {}
+final class RegisterStarted extends AuthenticationEvent {
+  final String username;
+  final String password;
+
+  const RegisterStarted({required this.username, required this.password});
+  @override
+  List<Object> get props => [username, password];
+}

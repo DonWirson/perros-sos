@@ -1,11 +1,6 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -34,12 +29,13 @@ class AuthenticationBloc
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     try {
       emit(RegisterInProgress());
-      final response = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: "twilliamson.valdes@gmail.com", password: "atata123");
+      // final response = await FirebaseAuth.instance
+      //     .createUserWithEmailAndPassword(
+      //         email: "twilliamson.valdes@gmail.com", password: "atata123");
       // FirebaseAuth.instance.signInWithCredential(credential)
       emit(
         RegisterSuccessfull(),
+        
       );
     } catch (e) {
       emit(
