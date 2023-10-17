@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/generic_scaffold.dart';
+import '../../core/utils/generic_scaffold.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});

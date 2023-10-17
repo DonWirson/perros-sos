@@ -37,6 +37,7 @@ class AuthenticationBloc
       final response = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: "twilliamson.valdes@gmail.com", password: "atata123");
+      // FirebaseAuth.instance.signInWithCredential(credential)
       emit(
         RegisterSuccessfull(),
       );

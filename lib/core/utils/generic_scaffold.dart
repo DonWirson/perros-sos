@@ -27,15 +27,12 @@ class GenericScaffold extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: bodyWidget,
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
               ),
-            ],
-          ),
+              color: Colors.white),
+          child: bodyWidget,
         ),
       ),
       bottomNavigationBar: showBottomBar

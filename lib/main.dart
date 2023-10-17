@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:perros_sos/blocs/Authentication/authentication_bloc.dart';
 import 'firebase_options.dart';
-import 'utils/routes.dart';
+import 'core/utils/routes.dart';
 
 void main() async {
   //Config de diccionario
