@@ -8,16 +8,14 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(AuthenticationInitial()) {
-    on<AuthenticationEvent>((event, emit) {
-      //TODO:Pendiente implementar lógica de eventos, al tener backend
-      on<LoginStarted>(_loginStarted);
-      on<RegisterStarted>(_registerStarted);
-    });
+    on<AuthenticationEvent>((event, emit) {});
+    on<LoginStarted>(_loginStarted);
+    on<RegisterStarted>(_registerStarted);
   }
 
   Future<void> _loginStarted(
       LoginStarted event, Emitter<AuthenticationState> emit) async {
-    emit(LoginInProgresss());
+    emit(LoginInProgress());
     try {
       emit(LoginSuccessful());
     } catch (e) {
@@ -33,10 +31,7 @@ class AuthenticationBloc
       //     .createUserWithEmailAndPassword(
       //         email: "twilliamson.valdes@gmail.com", password: "atata123");
       // FirebaseAuth.instance.signInWithCredential(credential)
-      emit(
-        RegisterSuccessfull(),
-        
-      );
+      emit(RegisterSuccessful());
     } catch (e) {
       emit(
         RegisterFailure(

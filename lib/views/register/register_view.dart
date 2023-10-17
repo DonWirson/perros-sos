@@ -19,7 +19,7 @@ class _RegisterViewState extends State<RegisterView> {
       showBottomBar: false,
       bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
-          if (state is RegisterSuccessfull) {
+          if (state is RegisterSuccessful) {
             Fluttertoast.showToast(
                 msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
             //Despues de mostrar el mensaje redirigir a pagina de landing.....
