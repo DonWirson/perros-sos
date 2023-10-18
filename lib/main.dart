@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:perros_sos/blocs/Authentication/authentication_bloc.dart';
-import 'package:perros_sos/core/observer/bloc_observer.dart';
+import 'blocs/Authentication/authentication_bloc.dart';
+import 'core/observer/bloc_observer.dart';
 import 'firebase_options.dart';
 import 'core/utils/routes.dart';
 

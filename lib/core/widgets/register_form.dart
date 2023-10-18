@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:perros_sos/blocs/Authentication/authentication_bloc.dart';
+import '../../blocs/Authentication/authentication_bloc.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({
@@ -19,13 +18,11 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child: Form(
         key: _formKey,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               children: [

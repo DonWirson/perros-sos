@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perros_sos/views/login/login_view.dart';
+import 'login_view.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
