@@ -33,7 +33,6 @@ class AuthenticationBloc
     }
   }
 
-// /^\S+@\S+\.\S+$/ regex email
   Future<void> _registerStarted(
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     try {
