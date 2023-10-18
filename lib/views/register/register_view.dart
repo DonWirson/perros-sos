@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:perros_sos/views/landing/landing_page.dart';
+import 'package:perros_sos/views/login/login_view.dart';
 import '../../blocs/Authentication/authentication_bloc.dart';
 import '../../core/utils/generic_scaffold.dart';
 import '../../core/widgets/register_form.dart';
@@ -22,8 +25,6 @@ class _RegisterViewState extends State<RegisterView> {
           if (state is RegisterSuccessful) {
             Fluttertoast.showToast(
                 msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
-            //Despues de mostrar el mensaje redirigir a pagina de landing.....
-            Future.delayed(const Duration(seconds: 2)).then((value) => null);
           }
         },
         child: const RegisterForm(),
