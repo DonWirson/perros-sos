@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../views/login/login_page.dart';
 
+import '../../views/landing/landing_page.dart';
+import '../../views/login/login_page.dart';
 import '../../views/views.dart';
 
 enum Routes {
-  landing(name: "landing", path: "/", screenWidget: CountrySelect()),
+  landing(name: "landing", path: "/", screenWidget: LandingPage()),
   login(name: "login", path: "/login", screenWidget: LoginPage()),
   register(name: "register", path: "/register", screenWidget: RegisterPage()),
   settings(name: "settings", path: "/settings", screenWidget: SettingsPage());

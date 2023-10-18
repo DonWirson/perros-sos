@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../core/utils/enums/auth_enum.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -13,12 +14,7 @@ class AuthenticationBloc
   late User? userStatus;
   late Stream<User?> userStream;
   AuthenticationBloc() : super(AuthenticationInitial()) {
-    //Usado para redirigir a landing o pagina de login, tambien en caso de cerrar sesion remotamente.
-    // FirebaseAuth.instance.authStateChanges().listen((user) {
-    //   userStatus = user;
-    // });
     userStream = FirebaseAuth.instance.authStateChanges();
-
     on<AuthenticationEvent>((event, emit) {});
     on<CheckedLoggedIn>(_checkedLoged);
     on<LoginStarted>(_loginStarted);
@@ -30,24 +26,13 @@ class AuthenticationBloc
     emit(LoginInProgress());
     try {
       final user = FirebaseAuth.instance.currentUser;
-
-      emit(LoginSuccessful());
+      emit(IsLoggedIn());
     } catch (e) {
-      emit(LoginFailure());
+      emit(IsNotLoggedIn());
     }
   }
 
-  Future<void> _loginStarted(
-      LoginStarted event, Emitter<AuthenticationState> emit) async {
-    emit(LoginInProgress());
-    try {
-      // FirebaseAuth.instance.signInWithCredential(response);
-      emit(LoginSuccessful());
-    } catch (e) {
-      emit(LoginFailure());
-    }
-  }
-
+// /^\S+@\S+\.\S+$/ regex email
   Future<void> _registerStarted(
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     try {
@@ -62,6 +47,35 @@ class AuthenticationBloc
           errorMessage: e.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> _loginStarted(
+      LoginStarted event, Emitter<AuthenticationState> emit) async {
+    emit(LoginInProgress());
+    try {
+      switch (event.authType) {
+        case AuthEnum.email:
+          final response =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: event.email,
+            password: event.password,
+          );
+          emit(LoginSuccessful());
+          break;
+        case AuthEnum.firebase:
+          break;
+        case AuthEnum.google:
+          break;
+        case AuthEnum.apple:
+          break;
+        default:
+          emit(
+              const LoginFailure(errorMessage: "FALTO PONER EL TIPO DE LOGIN"));
+          break;
+      }
+    } catch (e) {
+      emit(LoginFailure(errorMessage: e.toString()));
     }
   }
 }
