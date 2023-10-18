@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,7 +28,7 @@ class _RegisterFormState extends State<RegisterForm> {
           children: [
             Row(
               children: [
-                const SizedBox(width: 100, child: Text("User")),
+                const SizedBox(width: 100, child: Text("Email")),
                 Expanded(
                   child: TextFormField(
                     controller: userController,
@@ -35,7 +36,10 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Usuario no puede estar vacio';
+                        return 'Email no puede estar vacio';
+                      }
+                      if (!EmailValidator.validate(value)) {
+                        return 'Email no es valido';
                       }
                       return null;
                     },
@@ -54,7 +58,10 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Usuario no puede estar vacio';
+                        return 'contraseña no puede estar vacia';
+                      }
+                      if (value.length < 6) {
+                        return 'contraseña no puede tener menos de 6 caracteres';
                       }
                       return null;
                     },
@@ -62,23 +69,27 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
               ],
             ),
-            ElevatedButton(
-              child: const Text("Validar..."),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  BlocProvider.of<AuthenticationBloc>(context).add(
-                    RegisterStarted(
-                      username: userController.text.trim(),
-                      password: passController.text.trim(),
-                    ),
-                  );
-                } else {
-                  Fluttertoast.showToast(
-                      msg: "LLene los valores de forma correcta",
-                      timeInSecForIosWeb: 4,
-                      textColor: Colors.white);
-                }
-              },
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: ElevatedButton(
+                child: const Text("Validar..."),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    BlocProvider.of<AuthenticationBloc>(context).add(
+                      RegisterStarted(
+                        email: userController.text.trim(),
+                        password: passController.text.trim(),
+                      ),
+                    );
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "LLene los valores de forma correcta",
+                        timeInSecForIosWeb: 4,
+                        textColor: Colors.white);
+                  }
+                },
+              ),
             )
           ],
         ),

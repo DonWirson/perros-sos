@@ -25,10 +25,10 @@ final class LoginStarted extends AuthenticationEvent {
 }
 
 final class RegisterStarted extends AuthenticationEvent {
-  final String username;
+  final String email;
   final String password;
 
-  const RegisterStarted({required this.username, required this.password});
+  const RegisterStarted({required this.email, required this.password});
   @override
-  List<Object> get props => [username, password];
+  List<Object> get props => [email, password];
 }

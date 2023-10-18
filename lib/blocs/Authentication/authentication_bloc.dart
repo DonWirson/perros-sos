@@ -20,6 +20,7 @@ class AuthenticationBloc
     on<LoginStarted>(_loginStarted);
     on<RegisterStarted>(_registerStarted);
   }
+  //Actualmente sin ocupar
 
   Future<void> _checkedLoged(
       CheckedLoggedIn event, Emitter<AuthenticationState> emit) async {
@@ -39,7 +40,7 @@ class AuthenticationBloc
       emit(RegisterInProgress());
       final response = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              email: "twilliamson.valdes@gmail.com", password: "atata123");
+              email: event.email, password: event.password);
       emit(RegisterSuccessful());
     } catch (e) {
       emit(
