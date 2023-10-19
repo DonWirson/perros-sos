@@ -25,7 +25,7 @@ class _RegisterViewState extends State<RegisterView> {
                 msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
           }
         },
-        child: const RegisterForm(),
+        child: RegisterForm(),
       ),
     );
   }

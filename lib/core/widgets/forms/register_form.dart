@@ -1,26 +1,20 @@
-import 'dart:developer';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import '../../utils/text_form_field_generic.dart';
 
 import '../../../blocs/Authentication/authentication_bloc.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({
+class RegisterForm extends StatelessWidget {
+  RegisterForm({
     super.key,
   });
-  @override
-  State<RegisterForm> createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController userController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,67 +29,21 @@ class _RegisterFormState extends State<RegisterForm> {
           key: _formKey,
           child: Column(
             children: [
-              Row(
-                children: [
-                  const SizedBox(width: 100, child: Text("Email")),
-                  Expanded(
-                    child: TextFormField(
-                      controller: userController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      autocorrect: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Email no puede estar vacio';
-                        }
-                        if (!EmailValidator.validate(value)) {
-                          return 'Email no es valido';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
+              Flexible(
+                child: GenericTextFormField(
+                  labelText: "Username",
+                  textEditingController: userController,
+                  validatorFunction: validatorUsername,
+                ),
               ),
               const Divider(),
-              Row(
-                children: [
-                  const SizedBox(width: 100, child: Text("Password")),
-                  Expanded(
-                    flex: 4,
-                    child: TextFormField(
-                      controller: passController,
-                      obscureText: obscurePassword,
-                      enableSuggestions: false,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      autocorrect: false,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'contraseña no puede estar vacia';
-                        }
-                        if (value.length < 6) {
-                          return 'contraseña no puede tener menos de 6 caracteres';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Flexible(
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          obscurePassword = !obscurePassword;
-                          log("$obscurePassword");
-                        });
-                      },
-                      child: obscurePassword
-                          ? Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.black,
-                            )
-                          : Icon(Icons.remove_red_eye_outlined),
-                    ),
-                  ),
-                ],
+              Flexible(
+                child: GenericTextFormField(
+                  labelText: "Passwords",
+                  textEditingController: passController,
+                  isPasswordInput: true,
+                  validatorFunction: validatorPassword,
+                ),
               ),
               const Divider(),
               Padding(
@@ -124,5 +72,25 @@ class _RegisterFormState extends State<RegisterForm> {
         ),
       ),
     );
+  }
+
+  String? validatorPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'contraseña no puede estar vacia';
+    }
+    if (value.length < 6) {
+      return 'contraseña no puede tener menos de 6 caracteres';
+    }
+    return null;
+  }
+
+  String? validatorUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email no puede estar vacio';
+    }
+    if (!EmailValidator.validate(value)) {
+      return 'Email no es valido';
+    }
+    return null;
   }
 }
