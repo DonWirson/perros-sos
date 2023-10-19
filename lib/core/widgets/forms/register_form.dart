@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +20,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController userController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
+  bool obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,10 +61,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 children: [
                   const SizedBox(width: 100, child: Text("Password")),
                   Expanded(
+                    flex: 4,
                     child: TextFormField(
                       controller: passController,
+                      obscureText: obscurePassword,
+                      enableSuggestions: false,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      autocorrect: true,
+                      autocorrect: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'contraseña no puede estar vacia';
@@ -72,6 +77,22 @@ class _RegisterFormState extends State<RegisterForm> {
                         }
                         return null;
                       },
+                    ),
+                  ),
+                  Flexible(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                          log("$obscurePassword");
+                        });
+                      },
+                      child: obscurePassword
+                          ? Icon(
+                              Icons.remove_red_eye,
+                              color: Colors.black,
+                            )
+                          : Icon(Icons.remove_red_eye_outlined),
                     ),
                   ),
                 ],

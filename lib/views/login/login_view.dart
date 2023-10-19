@@ -43,12 +43,12 @@ class _LoginViewState extends State<LoginView> {
           //     labelText: 'Ingresa tu contraseña',
           //   ),
           // ),
-          InkWell(
-            child: const CircleAvatar(
-              child: Icon(Ionicons.logo_google),
-            ),
-            onTap: () {},
-          ),
+          // InkWell(
+          //   child: const CircleAvatar(
+          //     child: Icon(Ionicons.logo_google),
+          //   ),
+          //   onTap: () {},
+          // ),
         ],
       ),
     );
