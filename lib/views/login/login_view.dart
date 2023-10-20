@@ -11,7 +11,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return GenericScaffold(
