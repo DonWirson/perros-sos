@@ -17,7 +17,6 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return GenericScaffold(
-      showBottomBar: false,
       bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           if (state is RegisterSuccessful) {

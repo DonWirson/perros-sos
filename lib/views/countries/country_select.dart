@@ -14,7 +14,6 @@ class CountrySelect extends StatelessWidget {
 
     return GenericScaffold(
       title: "Seleccione su país",
-      showBottomBar: false,
       bodyWidget: Column(
         children: [
           Padding(

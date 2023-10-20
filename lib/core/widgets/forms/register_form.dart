@@ -1,12 +1,11 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/core/utils/form_validators/login_register_validators.dart';
-import '../../utils/text_form_field_generic.dart';
 
 import '../../../blocs/Authentication/authentication_bloc.dart';
+import '../../utils/form_validators/login_register_validators.dart';
+import '../../utils/text_form_field_generic.dart';
 
 class RegisterForm extends StatelessWidget {
   RegisterForm({

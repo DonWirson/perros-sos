@@ -71,11 +71,17 @@ class AuthenticationBloc
           break;
         default:
           emit(
-              const LoginFailure(errorMessage: "FALTO PONER EL TIPO DE LOGIN"));
+            const LoginFailure(errorMessage: "FALTO PONER EL TIPO DE LOGIN"),
+          );
           break;
       }
     } catch (e) {
-      emit(LoginFailure(errorMessage: e.toString()));
+      //Hacer un Handler de códigos de error
+      emit(
+        LoginFailure(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

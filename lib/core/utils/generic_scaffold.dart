@@ -7,8 +7,8 @@ class GenericScaffold extends StatelessWidget {
   const GenericScaffold(
       {required this.bodyWidget,
       this.title,
-      this.showBottomBar = true,
       this.showAppBar = true,
+      this.showBottomBar = false,
       super.key});
 
   final Widget bodyWidget;
