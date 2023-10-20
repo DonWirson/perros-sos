@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perros_sos/core/utils/form_validators/login_register_validators.dart';
 import '../../utils/text_form_field_generic.dart';
 
 import '../../../blocs/Authentication/authentication_bloc.dart';
@@ -33,7 +34,7 @@ class RegisterForm extends StatelessWidget {
                 child: GenericTextFormField(
                   labelText: "Username",
                   textEditingController: userController,
-                  validatorFunction: validatorUsername,
+                  validatorFunction: LoginRegisterValidators.emailValidator,
                 ),
               ),
               const Divider(),
@@ -42,7 +43,7 @@ class RegisterForm extends StatelessWidget {
                   labelText: "Passwords",
                   textEditingController: passController,
                   isPasswordInput: true,
-                  validatorFunction: validatorPassword,
+                  validatorFunction: LoginRegisterValidators.passwordValidator,
                 ),
               ),
               const Divider(),
@@ -72,25 +73,5 @@ class RegisterForm extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String? validatorPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'contraseña no puede estar vacia';
-    }
-    if (value.length < 6) {
-      return 'contraseña no puede tener menos de 6 caracteres';
-    }
-    return null;
-  }
-
-  String? validatorUsername(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email no puede estar vacio';
-    }
-    if (!EmailValidator.validate(value)) {
-      return 'Email no es valido';
-    }
-    return null;
   }
 }
