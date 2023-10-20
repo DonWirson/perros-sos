@@ -19,7 +19,6 @@ class LoginForm extends StatelessWidget {
   final TextEditingController userController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
