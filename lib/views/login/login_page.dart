@@ -1,47 +1,41 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../utils/generic_scaffold.dart';
+import '../../blocs/Authentication/authentication_bloc.dart';
+import '../landing/landing_page.dart';
+import 'login_view.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  @override
   Widget build(BuildContext context) {
-    return GenericScaffold(
-      showBottomBar: false,
-      bodyWidget: Column(
-        children: [
-          Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () => context.pushNamed("register"),
-                    child: const Text("missing_account").tr(),
-                  )
-                ],
-              ))
-          // TextFormField(
-          //   decoration: const InputDecoration(
-          //     border: UnderlineInputBorder(),
-          //     labelText: 'ingresa tu usuario',
-          //   ),
-          // ),
-          // TextFormField(
-          //   decoration: const InputDecoration(
-          //     border: UnderlineInputBorder(),
-          //     labelText: 'Ingresa tu contraseña',
-          //   ),
-          // ),
-        ],
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state is LoginFailure) {
+          Fluttertoast.showToast(
+            msg: "Error al iniciar sesión",
+          );
+        }
+        // if (state is LoginSuccessful) {
+        //   context.pop();
+        // }
+      },
+      child: StreamBuilder<User?>(
+        stream: BlocProvider.of<AuthenticationBloc>(context).userStream,
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.hasData) {
+            log("SNAPSHOT CON DATA");
+            return const LandingPage();
+          } else {
+            log("SNAPSHOT SIN DATA");
+            return const LoginView();
+          }
+        },
       ),
     );
   }

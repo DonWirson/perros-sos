@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../utils/generic_scaffold.dart';
+import '../../core/utils/generic_scaffold.dart';
 
 class CountrySelect extends StatelessWidget {
   const CountrySelect({super.key});
@@ -14,7 +14,6 @@ class CountrySelect extends StatelessWidget {
 
     return GenericScaffold(
       title: "Seleccione su país",
-      showBottomBar: false,
       bodyWidget: Column(
         children: [
           Padding(
