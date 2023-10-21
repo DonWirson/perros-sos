@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../blocs/Authentication/authentication_bloc.dart';
 import '../../core/utils/generic_scaffold.dart';
@@ -20,8 +20,8 @@ class _RegisterViewState extends State<RegisterView> {
       bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           if (state is RegisterSuccessful) {
-            Fluttertoast.showToast(
-                msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
+            // Fluttertoast.showToast(
+            //     msg: "REGISTRO EXITOSO!,REDIRIGIENDO", timeInSecForIosWeb: 2);
           }
         },
         child: RegisterForm(),

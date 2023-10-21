@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../blocs/Authentication/authentication_bloc.dart';
@@ -59,10 +59,10 @@ class RegisterForm extends StatelessWidget {
                         ),
                       );
                     } else {
-                      Fluttertoast.showToast(
-                          msg: "LLene los valores de forma correcta",
-                          timeInSecForIosWeb: 4,
-                          textColor: Colors.white);
+                      // Fluttertoast.showToast(
+                      //     msg: "LLene los valores de forma correcta",
+                      //     timeInSecForIosWeb: 4,
+                      //     textColor: Colors.white);
                     }
                   },
                 ),

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../blocs/Authentication/authentication_bloc.dart';
 import '../landing/landing_page.dart';
@@ -17,9 +17,9 @@ class LoginPage extends StatelessWidget {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is LoginFailure) {
-          Fluttertoast.showToast(
-            msg: "Error al iniciar sesión",
-          );
+          // Fluttertoast.showToast(
+          //   msg: "Error al iniciar sesión",
+          // );
         }
         // if (state is LoginSuccessful) {
         //   context.pop();
@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
             return const LandingPage();
           } else {
             log("SNAPSHOT SIN DATA");
-            return const LoginView();
+            return const LandingPage();
           }
         },
       ),
