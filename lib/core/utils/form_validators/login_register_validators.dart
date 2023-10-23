@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 
 class LoginRegisterValidators {
+  //TODO: Add context to parameters, then add dictionary keyword
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'contraseña no puede estar vacia';
@@ -11,6 +12,7 @@ class LoginRegisterValidators {
     return null;
   }
 
+  //TODO: Add context to parameters, then add dictionary keyword
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email no puede estar vacio';

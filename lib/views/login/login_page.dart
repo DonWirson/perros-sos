@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../blocs/Authentication/authentication_bloc.dart';
 import '../landing/landing_page.dart';
-import 'login_view.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
