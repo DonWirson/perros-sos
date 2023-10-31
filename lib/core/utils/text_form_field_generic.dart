@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+///Generic FormField, requires for label to be in dictionary(es-cl/en-us)
 class GenericTextFormField extends StatefulWidget {
   const GenericTextFormField(
       {super.key,
@@ -24,7 +26,10 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
     bool isThisInputPassword = widget.isPasswordInput;
     return Row(
       children: [
-        SizedBox(width: 100, child: Text(widget.labelText)),
+        SizedBox(
+          width: 100,
+          child: Text(widget.labelText).tr(),
+        ),
         Expanded(
           flex: 4,
           child: TextFormField(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,26 +13,22 @@ class LandingPage extends StatelessWidget {
     return Center(
       child: GenericScaffold(
         showBottomBar: true,
-        title: "Inicio",
+        title: "landing_title".tr(),
         bodyWidget: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Center(
-              //   child: !FirebaseAuth.instance.currentUser!.isAnonymous
-              //       ? Text("Hola ${FirebaseAuth.instance.currentUser?.email}")
-              //       : const Text("Bienvenido usuario anonimo"),
-              // ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child:
-                    Center(child: Text("Perros callejeros resportados hoy:")),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Center(
+                  child: const Text("landing_stray_dog_title").tr(),
+                ),
               ),
               const StrayDogsCarrousel(),
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: ElevatedButton(
-                  child: const Text("Cerrar sesion"),
+                  child: const Text("landing_sign_out").tr(),
                   onPressed: () => FirebaseAuth.instance.signOut(),
                 ),
               ),

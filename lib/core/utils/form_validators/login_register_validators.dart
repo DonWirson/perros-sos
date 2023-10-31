@@ -4,10 +4,10 @@ class LoginRegisterValidators {
   //TODO: Add context to parameters, then add dictionary keyword
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'contraseña no puede estar vacia';
+      return 'Contraseña no puede estar vacia';
     }
     if (value.length < 6) {
-      return 'contraseña no puede tener menos de 6 caracteres';
+      return 'Contraseña no puede tener menos de 6 caracteres';
     }
     return null;
   }

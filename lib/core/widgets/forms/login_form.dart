@@ -1,8 +1,6 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../blocs/Authentication/authentication_bloc.dart';
@@ -29,7 +27,7 @@ class LoginForm extends StatelessWidget {
           children: [
             Flexible(
               child: GenericTextFormField(
-                labelText: "Username",
+                labelText: "login_form_username",
                 textEditingController: userController,
                 validatorFunction: LoginRegisterValidators.emailValidator,
               ),
@@ -37,7 +35,7 @@ class LoginForm extends StatelessWidget {
             const Divider(),
             Flexible(
               child: GenericTextFormField(
-                labelText: "Passwords",
+                labelText: "Login_form_password",
                 textEditingController: passController,
                 isPasswordInput: true,
                 validatorFunction: LoginRegisterValidators.passwordValidator,
@@ -47,7 +45,7 @@ class LoginForm extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 25),
               child: ElevatedButton(
-                child: const Text("Validar..."),
+                child: const Text("Login_form_validate").tr(),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     BlocProvider.of<AuthenticationBloc>(context).add(
