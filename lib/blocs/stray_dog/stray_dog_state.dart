@@ -17,3 +17,7 @@ final class GotAllStrayDogSuccessful extends StrayDogState {
 }
 
 final class GotAllStrayDogFailure extends StrayDogState {}
+
+final class CreatedStrayDogReportSuccessful extends StrayDogState {}
+
+final class CreatedStrayDogReportFailure extends StrayDogState {}

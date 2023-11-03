@@ -57,10 +57,12 @@ class LoginForm extends StatelessWidget {
                       ),
                     );
                   } else {
-                    // Fluttertoast.showToast(
-                    //     msg: "Llene los valores de forma correcta",
-                    //     timeInSecForIosWeb: 4,
-                    //     textColor: Colors.white);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text("Login_form_login_validate_failure")
+                            .tr(),
+                      ),
+                    );
                   }
                 },
               ),
