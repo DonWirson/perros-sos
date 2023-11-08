@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:perros_sos/features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
+import 'package:perros_sos/injection_container.dart';
+import 'config/observer/app_bloc_observer.dart';
 
-import 'blocs/Authentication/authentication_bloc.dart';
-import 'blocs/observer/bloc_observer.dart';
-import 'blocs/stray_dog/stray_dog_bloc.dart';
-import 'core/utils/routes.dart';
+import 'config/routes/routes.dart';
 import 'firebase_options.dart';
 
 Future main() async {
+  //Inicia get-it
+  await initializeDependencies();
   //Bloc observer
   Bloc.observer = AppBlocObserver();
   //Config de diccionario
@@ -41,11 +44,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(),
         ),
-        BlocProvider(
-          create: (context) => StrayDogBloc(),
+        BlocProvider<StrayDogBloc>(
+          create: (context) => sl(),
         ),
       ],
       child: MaterialApp.router(
