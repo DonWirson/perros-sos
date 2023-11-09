@@ -1,14 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:perros_sos/'
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:perros_sos/core/enum/authentication_enum.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
+  late Stream<User?> userStream;
   AuthenticationBloc() : super(AuthenticationInitial()) {
+    userStream = FirebaseAuth.instance.authStateChanges();
     on<AuthenticationEvent>((event, emit) {});
-
   }
 
   Future<void> _checkedLoged(
@@ -28,7 +31,7 @@ class AuthenticationBloc
       emit(RegisterInProgress());
       final response = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-          email: event.email, password: event.password);
+              email: event.email, password: event.password);
       emit(RegisterSuccessful());
     } catch (e) {
       emit(
@@ -44,19 +47,19 @@ class AuthenticationBloc
     emit(LoginInProgress());
     try {
       switch (event.authType) {
-        case AuthEnum.email:
+        case AuthenticationEnum.email:
           final response =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: event.email,
             password: event.password,
           );
           emit(LoginSuccessful());
           break;
-        case AuthEnum.firebase:
+        case AuthenticationEnum.firebase:
           break;
-        case AuthEnum.google:
+        case AuthenticationEnum.google:
           break;
-        case AuthEnum.apple:
+        case AuthenticationEnum.apple:
           break;
         default:
           emit(
@@ -73,9 +76,4 @@ class AuthenticationBloc
       );
     }
   }
-
-
-
-
-
 }

@@ -14,7 +14,7 @@ final class LoginStarted extends AuthenticationEvent {
   final String email;
   final String password;
   final String token;
-  final AuthEnum authType;
+  final AuthenticationEnum authType;
   const LoginStarted(
       {required this.email,
       required this.password,
