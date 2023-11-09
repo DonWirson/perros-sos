@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perros_sos/features/authentication/presentation/pages/login/login_page.dart';
+import 'package:perros_sos/features/authentication/presentation/pages/register/register_page.dart';
+import 'package:perros_sos/features/stray_dog/presentation/pages/landing/landing.dart';
 
 enum Routes {
   landing(name: "landing", path: "/", screenWidget: LandingPage()),
   login(name: "login", path: "/login", screenWidget: LoginPage()),
-  register(name: "register", path: "/register", screenWidget: RegisterPage()),
-  settings(name: "settings", path: "/settings", screenWidget: SettingsPage());
+  register(name: "register", path: "/register", screenWidget: RegisterPage());
 
   static GoRouter get getroutes {
     return GoRouter(
