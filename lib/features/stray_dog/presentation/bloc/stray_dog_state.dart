@@ -5,7 +5,10 @@ abstract class StrayDogState extends Equatable {
   final List<StrayDogEntity>? strayDogs;
   final DioException? error;
   @override
-  List<Object> get props => [strayDogs!, error!];
+  List<Object> get props => [
+        strayDogs ?? [],
+        error ?? DioException(requestOptions: RequestOptions())
+      ];
 }
 
 final class StrayDogInitial extends StrayDogState {}
