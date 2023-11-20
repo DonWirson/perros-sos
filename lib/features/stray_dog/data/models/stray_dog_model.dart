@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:perros_sos/features/stray_dog/domain/entities/stray_dog.dart';
 
 class StrayDogModel extends StrayDogEntity {
@@ -12,7 +9,14 @@ class StrayDogModel extends StrayDogEntity {
     String? description,
     String? gender,
     bool? isActive,
-  });
+  }) : super(
+            id: id,
+            reportDate: reportDate,
+            address: address,
+            photoUrl: photoUrl,
+            description: description,
+            gender: gender,
+            isActive: isActive);
 
   factory StrayDogModel.fromJson(Map<String, dynamic> json) => StrayDogModel(
         id: json["id"],
