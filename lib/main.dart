@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:perros_sos/features/stray_dog/domain/usecases/get_stray_dogs.dart';
 import 'package:perros_sos/features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
 import 'package:perros_sos/injection_container.dart';
 import 'config/observer/app_bloc_observer.dart';
@@ -13,6 +14,8 @@ import 'config/routes/routes.dart';
 import 'firebase_options.dart';
 
 Future main() async {
+  //Carga de archivo .env
+  await dotenv.load(fileName: ".env");
   //Inicia get-it
   await initializeDependencies();
   //Bloc observer
@@ -26,8 +29,7 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //Carga de archivo .env
-  await dotenv.load(fileName: ".env");
+
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('es', 'CL')],
@@ -48,7 +50,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthenticationBloc(),
         ),
         BlocProvider<StrayDogBloc>(
-          create: (context) => sl(),
+          create: (context) => StrayDogBloc(
+            sl.get<GetStrayDogsUseCase>(),
+          ),
         ),
       ],
       child: MaterialApp.router(

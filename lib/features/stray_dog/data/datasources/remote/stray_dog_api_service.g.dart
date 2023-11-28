@@ -12,9 +12,7 @@ class _StrayDogApiService implements StrayDogApiService {
   _StrayDogApiService(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= '192.168.100.151/stray-dogs/';
-  }
+  });
 
   final Dio _dio;
 
