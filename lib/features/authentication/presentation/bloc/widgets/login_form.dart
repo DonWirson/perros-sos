@@ -83,7 +83,8 @@ class LoginForm extends StatelessWidget {
       ),
     );
   }
-    static String? passwordValidator(String? value) {
+
+  static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Contraseña no puede estar vacia';
     }

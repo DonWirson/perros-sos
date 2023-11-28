@@ -2,7 +2,7 @@ part of 'stray_dog_bloc.dart';
 
 abstract class StrayDogState extends Equatable {
   const StrayDogState({this.strayDogs, this.error});
-  final List<StrayDogEntity>? strayDogs;
+  final List<StrayDogModel>? strayDogs;
   final DioException? error;
   @override
   List<Object> get props => [
@@ -16,7 +16,7 @@ final class StrayDogInitial extends StrayDogState {}
 final class GotAllStrayDogsInProgress extends StrayDogState {}
 
 final class GotAllStrayDogsSuccess extends StrayDogState {
-  const GotAllStrayDogsSuccess(List<StrayDogEntity> strayDogs)
+  const GotAllStrayDogsSuccess(List<StrayDogModel> strayDogs)
       : super(strayDogs: strayDogs);
 }
 

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:perros_sos/core/resources/data_state.dart';
-import 'package:perros_sos/features/stray_dog/domain/entities/stray_dog.dart';
+import 'package:perros_sos/features/stray_dog/data/models/stray_dog_model.dart';
 import 'package:perros_sos/features/stray_dog/domain/usecases/get_stray_dogs.dart';
 
 part 'stray_dog_event.dart';
@@ -22,7 +22,7 @@ class StrayDogBloc extends Bloc<StrayDogEvent, StrayDogState> {
       final dataState = await getStrayDogsUseCase();
       if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
         emit(
-          GotAllStrayDogsSuccess(dataState.data!),
+          GotAllStrayDogsSuccess(dataState.data as List<StrayDogModel>),
         );
       }
       if (dataState is DataFailed) {

@@ -10,7 +10,7 @@ abstract class StrayDogEvent extends Equatable {
 final class GotAllStrayDogs extends StrayDogEvent {}
 
 final class CreatedStrayDogReport extends StrayDogEvent {
-  final StrayDogEntity strayDogModel;
+  final StrayDogModel strayDogModel;
   const CreatedStrayDogReport({required this.strayDogModel});
   @override
   List<Object> get props => [];
