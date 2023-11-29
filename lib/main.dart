@@ -2,14 +2,23 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 
-import 'blocs/Authentication/authentication_bloc.dart';
-import 'core/observer/bloc_observer.dart';
-import 'core/utils/routes.dart';
+import 'config/observer/app_bloc_observer.dart';
+import 'config/routes/routes.dart';
+import 'features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'features/stray_dog/domain/usecases/get_stray_dogs.dart';
+import 'features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
+import 'features/user_preferences/presentation/bloc/user_preferences_bloc.dart';
 import 'firebase_options.dart';
+import 'injection_container.dart';
 
-void main() async {
+Future main() async {
+  //Carga de archivo .env
+  await dotenv.load(fileName: ".env");
+  //Inicia get-it
+  await initializeDependencies();
   //Bloc observer
   Bloc.observer = AppBlocObserver();
   //Config de diccionario
@@ -21,6 +30,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('es', 'CL')],
@@ -37,8 +47,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(),
+        ),
+        BlocProvider<StrayDogBloc>(
+          create: (context) => StrayDogBloc(
+            sl.get<GetStrayDogsUseCase>(),
+          ),
+        ),
+        BlocProvider<UserPreferencesBloc>(
+          create: (context) => UserPreferencesBloc(),
         ),
       ],
       child: MaterialApp.router(
@@ -50,6 +68,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.grey.shade100),
         routerConfig: Routes.getroutes,
       ),
+      // ),
     );
   }
 }
