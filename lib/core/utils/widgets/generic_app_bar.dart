@@ -14,7 +14,7 @@ class GenericAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    void navigateToSettings() => context.goNamed("settings");
+    void navigateToSettings() => context.pushNamed("settings");
     return AppBar(
       title: title != null ? Text("$title") : null,
       //muestra backbutton en caso de ser posible hacer pop

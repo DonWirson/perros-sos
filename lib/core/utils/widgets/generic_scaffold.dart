@@ -4,29 +4,36 @@ import 'generic_app_bar.dart';
 import 'generic_bottom_bar.dart';
 
 class GenericScaffold extends StatelessWidget {
-  const GenericScaffold(
-      {required this.bodyWidget,
-      this.title,
-      this.showAppBar = true,
-      this.showBottomBar = false,
-      super.key});
+  const GenericScaffold({
+    required this.bodyWidget,
+    required this.showAppBar,
+    required this.showBottomBar,
+    this.title,
+    this.appBarWidget,
+    this.bottomBarWidget,
+    super.key,
+  });
 
   final Widget bodyWidget;
   final String? title;
-  final bool showBottomBar;
+  final Widget? bottomBarWidget;
+  final PreferredSizeWidget? appBarWidget;
   final bool showAppBar;
+  final bool showBottomBar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: showAppBar
-          ? GenericAppBar(
-              title: title,
-            )
+          ? (appBarWidget ??
+              GenericAppBar(
+                title: title,
+              ))
           : null,
-      //bodyWidget cambia por cada vista
+      //bodyWidget cambia por cada PAGE
       body: bodyWidget,
-      bottomNavigationBar: showBottomBar ? const GenericBottomBar() : null,
+      bottomNavigationBar:
+          showBottomBar ? (bottomBarWidget ?? const GenericBottomBar()) : null,
     );
   }
 }
