@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../config/routes/routes.dart';
+import '../../../features/user_preferences/presentation/bloc/user_preferences_bloc.dart';
 
-class GenericBottomBar extends StatelessWidget {
+class GenericBottomBar extends StatefulWidget {
   const GenericBottomBar({
     super.key,
-    required this.selectedIndex,
   });
 
-  final int selectedIndex;
+  @override
+  State<GenericBottomBar> createState() => _GenericBottomBarState();
+}
 
+class _GenericBottomBarState extends State<GenericBottomBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.business),
-          label: 'Business',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: 'School',
-        ),
-      ],
-      currentIndex: selectedIndex,
-      selectedItemColor: Colors.amber[800],
+      items: Routes.bottomBarItems,
+      currentIndex: BlocProvider.of<UserPreferencesBloc>(context).currentIndex,
+      selectedItemColor: const Color.fromARGB(158, 255, 145, 0),
+      onTap: (currentIndex) => BlocProvider.of<UserPreferencesBloc>(context)
+          .currentIndex = currentIndex,
     );
   }
 }

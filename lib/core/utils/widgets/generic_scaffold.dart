@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perros_sos/core/utils/widgets/generic_app_bar.dart';
+import 'generic_app_bar.dart';
 
 import 'generic_bottom_bar.dart';
 
@@ -15,9 +15,9 @@ class GenericScaffold extends StatelessWidget {
   final String? title;
   final bool showBottomBar;
   final bool showAppBar;
+
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
     return Scaffold(
       appBar: showAppBar
           ? GenericAppBar(
@@ -25,24 +25,8 @@ class GenericScaffold extends StatelessWidget {
             )
           : null,
       //bodyWidget cambia por cada vista
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-              color: Colors.white),
-          child: bodyWidget,
-        ),
-      ),
-      bottomNavigationBar: showBottomBar
-          ? GenericBottomBar(
-              selectedIndex: selectedIndex,
-            )
-          : null,
+      body: bodyWidget,
+      bottomNavigationBar: showBottomBar ? const GenericBottomBar() : null,
     );
   }
 }
