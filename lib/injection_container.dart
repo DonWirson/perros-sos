@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
 import 'config/app.config.dart';
 import 'features/stray_dog/data/datasources/remote/stray_dog_api_service.dart';
 import 'features/stray_dog/data/repositories/stray_dog_repository_impl.dart';

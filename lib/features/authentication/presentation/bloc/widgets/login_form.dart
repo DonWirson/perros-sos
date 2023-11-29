@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../../core/enum/authentication_enum.dart';
-import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../../../../core/utils/widgets/generic_text_form_field.dart';
 import '../authentication_bloc.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/core/utils/loading_progress_indicator.dart';
-import 'package:perros_sos/core/utils/widgets/generic_scaffold.dart';
-import 'package:perros_sos/features/authentication/presentation/bloc/widgets/login_form.dart';
+import '../../../../../core/utils/loading_progress_indicator.dart';
+import '../../../../../core/utils/widgets/generic_scaffold.dart';
+import '../../bloc/widgets/login_form.dart';
 import '../../bloc/authentication_bloc.dart';
 
 class LoginPage extends StatefulWidget {

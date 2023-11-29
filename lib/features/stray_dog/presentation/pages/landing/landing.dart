@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/core/utils/loading_progress_indicator.dart';
-import 'package:perros_sos/core/utils/widgets/generic_scaffold.dart';
-import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
+import '../../../../../core/utils/loading_progress_indicator.dart';
+import '../../../../../core/utils/widgets/generic_scaffold.dart';
+import '../../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../../../core/utils/widgets/generic_app_bar.dart';
 import '../map/landing_map_page.dart';
 import '../settings/landing_settings_page.dart';
