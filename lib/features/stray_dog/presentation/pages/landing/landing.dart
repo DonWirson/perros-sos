@@ -1,51 +1,58 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:perros_sos/core/utils/widgets/generic_scaffold.dart';
-import 'package:perros_sos/features/stray_dog/data/models/stray_dog_model.dart';
-import 'package:perros_sos/features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
-import 'package:perros_sos/features/stray_dog/presentation/widgets/stray_dog_carrouse.dart';
-import 'package:perros_sos/injection_container.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/utils/widgets/generic_app_bar.dart';
+import '../map/landing_map_page.dart';
+import '../settings/landing_settings_page.dart';
+import '../stray_dog/landing_stray_dog_page.dart';
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
+import '../../../../../config/routes/routes.dart';
+import '../../../../user_preferences/presentation/bloc/user_preferences_bloc.dart';
+
+class LandingPage extends StatefulWidget {
+  const LandingPage(
+      {this.title,
+      this.showAppBar = true,
+      this.showBottomBar = false,
+      super.key});
+
+  final String? title;
+  final bool showBottomBar;
+  final bool showAppBar;
 
   @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GenericScaffold(
-        showBottomBar: true,
-        title: "landing_title".tr(),
-        bodyWidget: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Center(
-                  child: const Text("landing_stray_dog_title").tr(),
-                ),
-              ),
-              const StrayDogsCarrousel(),
-              ElevatedButton(
-                child: const Text("Test crear reporte"),
-                onPressed: () {
-                  sl.get<StrayDogBloc>().add(
-                        const CreatedStrayDogReport(
-                            strayDogModel: StrayDogModel()),
-                      );
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: ElevatedButton(
-                  child: const Text("landing_sign_out").tr(),
-                  onPressed: () => FirebaseAuth.instance.signOut(),
-                ),
-              ),
-            ],
-          ),
-        ),
+    return Scaffold(
+      appBar: widget.showAppBar
+          ? GenericAppBar(
+              title: widget.title,
+            )
+          : null,
+      body: IndexedStack(
+        index: BlocProvider.of<UserPreferencesBloc>(context).currentIndex,
+        children: const [
+          LandingStrayDog(),
+          LandingMap(),
+          Landingsettings(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: Routes.bottomBarItems,
+        currentIndex:
+            BlocProvider.of<UserPreferencesBloc>(context).currentIndex,
+        selectedItemColor: const Color.fromARGB(158, 255, 145, 0),
+        onTap: (currentIndex) {
+          setState(
+            () {
+              BlocProvider.of<UserPreferencesBloc>(context).currentIndex =
+                  currentIndex;
+            },
+          );
+        },
       ),
     );
   }
