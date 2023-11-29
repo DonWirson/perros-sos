@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:perros_sos/features/stray_dog/domain/usecases/get_stray_dogs.dart';
-import 'package:perros_sos/features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
-import 'package:perros_sos/injection_container.dart';
-import 'config/observer/app_bloc_observer.dart';
 
+import 'config/observer/app_bloc_observer.dart';
 import 'config/routes/routes.dart';
+import 'features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'features/stray_dog/domain/usecases/get_stray_dogs.dart';
+import 'features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
+import 'features/user_preferences/presentation/bloc/user_preferences_bloc.dart';
 import 'firebase_options.dart';
+import 'injection_container.dart';
 
 Future main() async {
   //Carga de archivo .env
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
             sl.get<GetStrayDogsUseCase>(),
           ),
         ),
+        BlocProvider<UserPreferencesBloc>(
+          create: (context) => UserPreferencesBloc(),
+        ),
       ],
       child: MaterialApp.router(
         locale: context.locale,
@@ -64,6 +68,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.grey.shade100),
         routerConfig: Routes.getroutes,
       ),
+      // ),
     );
   }
 }
