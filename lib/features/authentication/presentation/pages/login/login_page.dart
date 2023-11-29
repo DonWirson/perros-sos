@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:perros_sos/features/stray_dog/presentation/pages/landing/landing.dart';
+import '../../bloc/authentication_bloc.dart';
+import '../register/register_page.dart';
+import '../../../../stray_dog/presentation/pages/landing/landing.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -27,10 +28,13 @@ class LoginPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.hasData) {
             log("SNAPSHOT CON DATA");
-            return const LandingPage();
+            return const LandingPage(
+              showAppBar: true,
+              showBottomBar: true,
+            );
           } else {
             log("SNAPSHOT SIN DATA");
-            return const LandingPage();
+            return const RegisterPage();
           }
         },
       ),
