@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:perros_sos/features/stray_dog/data/models/stray_dog_model.dart';
+
+import '../../data/models/stray_dog_model.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({

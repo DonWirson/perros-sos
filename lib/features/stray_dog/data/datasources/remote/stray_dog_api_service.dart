@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:perros_sos/features/stray_dog/data/models/stray_dog_model.dart';
+import '../../models/stray_dog_model.dart';
 
 part 'stray_dog_api_service.g.dart';
 

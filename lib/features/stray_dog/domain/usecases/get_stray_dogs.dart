@@ -1,7 +1,7 @@
-import 'package:perros_sos/core/resources/data_state.dart';
-import 'package:perros_sos/core/use_case/use_case.dart';
-import 'package:perros_sos/features/stray_dog/domain/entities/stray_dog.dart';
-import 'package:perros_sos/features/stray_dog/domain/repositories/stray_dog_repository.dart';
+import '../../../../core/resources/data_state.dart';
+import '../../../../core/use_case/use_case.dart';
+import '../entities/stray_dog.dart';
+import '../repositories/stray_dog_repository.dart';
 
 class GetStrayDogsUseCase
     implements UseCase<DataState<List<StrayDogEntity>>, void> {

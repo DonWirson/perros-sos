@@ -1,4 +1,4 @@
-import 'package:perros_sos/features/stray_dog/domain/entities/stray_dog.dart';
+import '../../domain/entities/stray_dog.dart';
 
 class StrayDogModel extends StrayDogEntity {
   const StrayDogModel({

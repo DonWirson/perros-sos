@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../../../core/resources/data_state.dart';
+import '../../domain/repositories/stray_dog_repository.dart';
 import '../datasources/remote/stray_dog_api_service.dart';
 import '../models/stray_dog_model.dart';
-import '../../domain/repositories/stray_dog_repository.dart';
 
 class StrayDogRepositoryImplementation implements StrayDogRepository {
   final StrayDogApiService _strayDogApiService;

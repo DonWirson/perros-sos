@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perros_sos/features/stray_dog/data/models/stray_dog_model.dart';
-import 'package:perros_sos/features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
-import 'package:perros_sos/features/stray_dog/presentation/widgets/custom_card.dart';
+
+import '../../data/models/stray_dog_model.dart';
+import '../bloc/stray_dog_bloc.dart';
+import 'custom_card.dart';
 
 class StrayDogsCarrousel extends StatefulWidget {
   const StrayDogsCarrousel({super.key});

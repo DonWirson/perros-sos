@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perros_sos/core/utils/widgets/generic_scaffold.dart';
-import 'package:perros_sos/core/utils/widgets/generic_text_form_field.dart';
-import 'package:perros_sos/features/authentication/presentation/bloc/authentication_bloc.dart';
+import '../../../../../core/utils/widgets/generic_scaffold.dart';
+import '../../../../../core/utils/widgets/generic_text_form_field.dart';
+import '../authentication_bloc.dart';
 
 class RegisterForm extends StatelessWidget {
   RegisterForm({
@@ -17,59 +18,67 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GenericScaffold(
-      bodyWidget: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-        child: BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            if (state is RegisterSuccessful) {
-              context.pop();
-            }
-          },
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Flexible(
-                  child: GenericTextFormField(
-                    labelText: "Login_form_password",
-                    textEditingController: userController,
-                    validatorFunction: emailValidator,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      child: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          if (state is RegisterSuccessful) {
+            context.pop();
+          }
+        },
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Flexible(
+                child: GenericTextFormField(
+                  labelText: "Login_form_password",
+                  textEditingController: userController,
+                  validatorFunction: emailValidator,
                 ),
-                const Divider(),
-                Flexible(
-                  child: GenericTextFormField(
-                    labelText: "Login_form_password",
-                    textEditingController: passController,
-                    isPasswordInput: true,
-                    validatorFunction: passwordValidator,
-                  ),
+              ),
+              const Divider(),
+              Flexible(
+                child: GenericTextFormField(
+                  labelText: "Login_form_password",
+                  textEditingController: passController,
+                  isPasswordInput: true,
+                  validatorFunction: passwordValidator,
                 ),
-                const Divider(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25),
-                  child: ElevatedButton(
-                    child: const Text("Login_form_validate").tr(),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        BlocProvider.of<AuthenticationBloc>(context).add(
-                          RegisterStarted(
-                            email: userController.text.trim(),
-                            password: passController.text.trim(),
-                          ),
-                        );
-                      } else {
-                        // Fluttertoast.showToast(
-                        //     msg: "LLene los valores de forma correcta",
-                        //     timeInSecForIosWeb: 4,
-                        //     textColor: Colors.white);
-                      }
-                    },
-                  ),
-                )
-              ],
-            ),
+              ),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child: ElevatedButton(
+                  child: const Text("Login_form_validate").tr(),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      BlocProvider.of<AuthenticationBloc>(context).add(
+                        RegisterStarted(
+                          email: userController.text.trim(),
+                          password: passController.text.trim(),
+                        ),
+                      );
+                    } else {
+                      // Fluttertoast.showToast(
+                      //     msg: "LLene los valores de forma correcta",
+                      //     timeInSecForIosWeb: 4,
+                      //     textColor: Colors.white);
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                onPressed: () => FirebaseAuth.instance.signInAnonymously(),
+                child: Text(
+                  "anonymus_login",
+                  style: Theme.of(context).textTheme.labelMedium,
+                ).tr(),
+              )
+            ],
           ),
         ),
       ),
