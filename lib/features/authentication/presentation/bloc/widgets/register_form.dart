@@ -71,13 +71,6 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              TextButton(
-                onPressed: () => FirebaseAuth.instance.signInAnonymously(),
-                child: Text(
-                  "anonymus_login",
-                  style: Theme.of(context).textTheme.labelMedium,
-                ).tr(),
-              )
             ],
           ),
         ),

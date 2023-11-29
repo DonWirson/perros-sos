@@ -32,3 +32,7 @@ final class RegisterStarted extends AuthenticationEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+final class ClosedSession extends AuthenticationEvent {}
+
+final class OpenedSession extends AuthenticationEvent {}

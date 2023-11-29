@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -73,6 +74,13 @@ class LoginForm extends StatelessWidget {
                 onPressed: () => context.pushNamed("register"),
                 child: const Text("missing_account").tr(),
               ),
+            ),
+            TextButton(
+              onPressed: () => FirebaseAuth.instance.signInAnonymously(),
+              child: Text(
+                "anonymus_login",
+                style: Theme.of(context).textTheme.labelMedium,
+              ).tr(),
             )
           ],
         ),

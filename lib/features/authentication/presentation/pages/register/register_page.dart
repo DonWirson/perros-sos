@@ -17,6 +17,8 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return GenericScaffold(
+      showAppBar: true,
+      showBottomBar: false,
       title: "register_page".tr(),
       bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {

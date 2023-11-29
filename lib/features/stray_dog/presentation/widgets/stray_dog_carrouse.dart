@@ -30,7 +30,7 @@ class _StrayDogsCarrouselState extends State<StrayDogsCarrousel> {
       listener: (context, state) {
         if (state is GotAllStrayDogsSuccess) {
           setState(() {
-            strayDogsModel = state.strayDogs! as List<StrayDogModel>;
+            strayDogsModel = state.strayDogs!;
           });
         }
         if (state is GotAllStrayDogsFailure) {
