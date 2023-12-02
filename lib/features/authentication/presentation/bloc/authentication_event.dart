@@ -9,6 +9,9 @@ abstract class AuthenticationEvent extends Equatable {
 
 final class CheckedLoggedIn extends AuthenticationEvent {}
 
+final class LoggedInAnonymously extends AuthenticationEvent {}
+final class LoggedOut extends AuthenticationEvent {}
+
 //En caso de no ocupar algun valor, dejar con valor dummy
 final class LoginStarted extends AuthenticationEvent {
   final String email;

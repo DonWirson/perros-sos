@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../config/routes/routes.dart';
 import '../../../../../core/utils/loading_progress_indicator.dart';
+import '../../../../../core/utils/widgets/generic_app_bar.dart';
 import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../../../authentication/presentation/bloc/authentication_bloc.dart';
-import '../../../../../core/utils/widgets/generic_app_bar.dart';
+import '../../../../user_preferences/presentation/bloc/user_preferences_bloc.dart';
 import '../map/landing_map_page.dart';
 import '../settings/landing_settings_page.dart';
 import '../stray_dog/landing_stray_dog_page.dart';
-
-import '../../../../../config/routes/routes.dart';
-import '../../../../user_preferences/presentation/bloc/user_preferences_bloc.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage(
@@ -34,16 +34,25 @@ class _LandingPageState extends State<LandingPage> {
       listener: (context, state) {
         //En caso de cerrar sesión por medio de la app o de forma externa.
         if (state is IsNotLoggedIn) {
-          context.pushReplacementNamed("login");
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('No esta actualmente logeado :C'),
+              content: Text('No esta actualmente logeado :C,landing'),
               duration: Duration(seconds: 10),
             ),
           );
-        }      },
+          context.pushReplacementNamed("login");
+        }
+        if (state is IsLoggedIn) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Esta actualmente logeado :D, landing'),
+              duration: Duration(seconds: 10),
+            ),
+          );
+        }
+      },
       builder: (context, state) {
-        if(state is LoginInProgress){
+        if (state is LoginInProgress) {
           return const LoadingProgressIndicator();
         }
         return GenericScaffold(

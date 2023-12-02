@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -76,7 +75,8 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () => FirebaseAuth.instance.signInAnonymously(),
+              onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
+                  .add(LoggedInAnonymously()),
               child: Text(
                 "anonymus_login",
                 style: Theme.of(context).textTheme.labelMedium,

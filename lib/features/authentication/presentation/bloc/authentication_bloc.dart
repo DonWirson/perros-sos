@@ -14,47 +14,28 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   late Stream<User?> userStream;
   late StreamSubscription<User?> userStateStreamListener;
+  //Declara listener de stream en body de constructor de bloc
   AuthenticationBloc() : super(AuthenticationInitial()) {
-    log("-----------Authentication listener-----------");
+    log("-----------Authentication listener started-----------");
     userStateStreamListener =
         FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      //Dispara evento que cierra o inicia sesión
       if (user == null) {
-        add(
-          ClosedSession(),
-        );
+        log("-----------Not Logged in Listener logger-----------");
+        add(ClosedSession());
       } else {
-        add(
-          OpenedSession(),
-        );
+        log("-----------Logged in Listener logger-----------");
+        add(OpenedSession());
       }
     });
+    //Eventos de bloc actuales
     on<AuthenticationEvent>((event, emit) {});
-    on<CheckedLoggedIn>(_checkedLoggedIn);
-    on<OpenedSession>(_openedSession);
-    on<ClosedSession>(_closedSession);
+    on<LoggedInAnonymously>(logInAnonymously);
+    on<OpenedSession>(openedSession);
+    on<ClosedSession>(closedSession);
+    on<LoggedOut>(loggedOut);
   }
 
-  Future<void> _openedSession(
-      OpenedSession event, Emitter<AuthenticationState> emit) async {
-    try {
-      emit(
-        LoginInProgress(),
-      );
-      await Future.delayed(
-        const Duration(seconds: 2),
-      );
-      emit(
-        IsLoggedIn(),
-      );
-    } catch (e) {
-      emit(
-        IsLoggedIn(),
-      );
-    }
-  }
-
-  Future<void> _closedSession(
+  Future<void> closedSession(
       ClosedSession event, Emitter<AuthenticationState> emit) async {
     try {
       emit(
@@ -70,40 +51,60 @@ class AuthenticationBloc
       log(
         e.toString(),
       );
-      emit(
-        IsNotLoggedIn(),
-      );
+      //Emite state de usuario logeado, para que reintente cerrar sesión
+      // emit(IsLoggedIn());
     }
   }
 
-  Future<void> _checkedLoggedIn(
-      CheckedLoggedIn event, Emitter<AuthenticationState> emit) async {
-    emit(
-      LoginInProgress(),
-    );
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+  Future<void> openedSession(
+      OpenedSession event, Emitter<AuthenticationState> emit) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        //Dispara evento que cierra sesión
-        add(
-          ClosedSession(),
-        );
-      } else {
-        add(
-          OpenedSession(),
-        );
-      }
+      emit(
+        LoginInProgress(),
+      );
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
+      emit(
+        IsLoggedIn(),
+      );
+    } catch (e) {
+      log(
+        e.toString(),
+      );
+      //Emite state de usuario sin iniciar sesión, para que reintente iniciar sesión
+      // emit(IsNotLoggedIn());
+    }
+  }
+
+  Future<void> logInAnonymously(
+      LoggedInAnonymously event, Emitter<AuthenticationState> emit) async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
     } catch (e) {
       emit(
-        IsNotLoggedIn(),
+        AnonymousLoginFailure(
+          error: e.toString(),
+        ),
+      );
+      log(e.toString());
+    }
+  }
+
+  Future<void> loggedOut(
+      LoggedOut event, Emitter<AuthenticationState> emit) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      emit(
+        LogOutFailure(
+          error: e.toString(),
+        ),
       );
     }
   }
 
-  Future<void> _registerStarted(
+  Future<void> registerStarted(
       RegisterStarted event, Emitter<AuthenticationState> emit) async {
     try {
       emit(RegisterInProgress());
@@ -121,19 +122,16 @@ class AuthenticationBloc
     }
   }
 
-  Future<void> _loginStarted(
+  Future<void> loginStarted(
       LoginStarted event, Emitter<AuthenticationState> emit) async {
     emit(LoginInProgress());
     try {
       switch (event.authType) {
         case AuthenticationEnum.email:
-          final response =
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: event.email,
             password: event.password,
           );
-          //TODO: agregar validaciones
-          emit(LoginSuccessful());
           break;
         case AuthenticationEnum.firebase:
           break;
@@ -149,7 +147,7 @@ class AuthenticationBloc
           break;
       }
     } catch (e) {
-      //Hacer un Handler de códigos de error
+      //TODO: Hacer un Handler de códigos de error
       emit(
         LoginFailure(
           errorMessage: e.toString(),

@@ -66,8 +66,8 @@ enum Routes {
         icon: Routes.landing.icon,
       ),
       BottomNavigationBarItem(
-        label: Routes.grid.name.tr(),
-        icon: Routes.grid.icon,
+        label: Routes.map.name.tr(),
+        icon: Routes.map.icon,
       ),
       BottomNavigationBarItem(
         label: Routes.settings.name.tr(),
