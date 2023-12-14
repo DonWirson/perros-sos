@@ -48,6 +48,7 @@ dependencies:
   google_sign_in: ^6.1.5
   http: ^1.1.0
   ionicons: ^0.2.2
+  mapbox_gl: ^0.16.0
   permission_handler: ^11.1.0
   retrofit: ^4.0.3
 
@@ -57,6 +58,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  mockito: ^5.4.3
   rename: ^3.0.1
   retrofit_generator: ^8.0.3
 
