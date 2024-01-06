@@ -1,4 +1,16 @@
 #   APP Perdidog! 🐕
+## Features de la app:
+-   Gestor de estado con Bloc
+-   Clean Architecture
+-   Inyección de dependencias
+-   Localización, diccionario en es-cl y en-US
+-   Uso de Widgets genéricos para evitar repetir código
+-   Login con firebase, con usuario o de forma anónima
+-   Escuchar cambios en tiempo real estado de usuario en Firebase
+-   Conexión con api NestJS alojada en docker
+-   Manejo de permisos
+-   Separación de ambientes env
+-   Generación de llamadas a api con retrofit
 
 ##   Pasos para levantar app
 
