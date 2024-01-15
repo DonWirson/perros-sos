@@ -20,69 +20,71 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-      child: Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.always,
-        child: Column(
-          children: [
-            Flexible(
-              child: GenericTextFormField(
-                labelText: "login_form_username",
+      padding: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 200,
+              ),
+              GenericTextFormField(
+                labelText: "login_username",
+                hintText: "login_username_hint",
                 textEditingController: userController,
                 validatorFunction: emailValidator,
               ),
-            ),
-            const Divider(),
-            Flexible(
-              child: GenericTextFormField(
-                labelText: "Login_form_password",
+              GenericTextFormField(
+                labelText: "login_password",
+                hintText: "login_password_hint",
                 textEditingController: passController,
                 isPasswordInput: true,
                 validatorFunction: passwordValidator,
               ),
-            ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.only(top: 25),
-              child: ElevatedButton(
-                child: const Text("Login_form_validate").tr(),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    BlocProvider.of<AuthenticationBloc>(context).add(
-                      LoginStarted(
-                        email: userController.text.trim(),
-                        password: passController.text.trim(),
-                        authType: AuthenticationEnum.email,
-                        token: "",
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text("Login_form_login_validate_failure")
-                            .tr(),
-                      ),
-                    );
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: ElevatedButton(
+                  child: const Text("Login_form_validate").tr(),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      BlocProvider.of<AuthenticationBloc>(context).add(
+                        LoginStarted(
+                          email: userController.text.trim(),
+                          password: passController.text.trim(),
+                          authType: AuthenticationEnum.email,
+                          token: "",
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                              const Text("Login_form_login_validate_failure")
+                                  .tr(),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0),
-              child: ElevatedButton(
-                onPressed: () => context.pushNamed("register"),
-                child: const Text("missing_account").tr(),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: ElevatedButton(
+                  onPressed: () => context.pushNamed("register"),
+                  child: const Text("missing_account").tr(),
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () => FirebaseAuth.instance.signInAnonymously(),
-              child: Text(
-                "anonymus_login",
-                style: Theme.of(context).textTheme.labelMedium,
-              ).tr(),
-            )
-          ],
+              TextButton(
+                onPressed: () => FirebaseAuth.instance.signInAnonymously(),
+                child: Text(
+                  "anonymus_login",
+                  style: Theme.of(context).textTheme.labelMedium,
+                ).tr(),
+              )
+            ],
+          ),
         ),
       ),
     );
