@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../bloc/widgets/login_background.dart';
 import '../../../../../core/utils/loading_progress_indicator.dart';
 import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../bloc/widgets/login_form.dart';
@@ -44,10 +45,12 @@ class _LoginPageState extends State<LoginPage> {
           return const LoadingProgressIndicator();
         }
         return GenericScaffold(
-          showAppBar: true,
+          showAppBar: false,
           showBottomBar: false,
           title: "Login",
-          bodyWidget: LoginForm(),
+          bodyWidget: LoginBackground(
+            stackBody: LoginForm(),
+          ),
         );
       },
     );

@@ -25,52 +25,54 @@ class RegisterForm extends StatelessWidget {
             context.pop();
           }
         },
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Flexible(
-                child: GenericTextFormField(
-                  labelText: "Login_form_password",
-                  textEditingController: userController,
-                  validatorFunction: emailValidator,
-                ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  GenericTextFormField(
+                    labelText: "register_form_password",
+                    textEditingController: userController,
+                    validatorFunction: emailValidator,
+                  ),
+                  GenericTextFormField(
+                    labelText: "register_form_password",
+                    textEditingController: passController,
+                    isPasswordInput: true,
+                    validatorFunction: passwordValidator,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: ElevatedButton(
+                      child: const Text("register_form_validate").tr(),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          BlocProvider.of<AuthenticationBloc>(context).add(
+                            RegisterStarted(
+                              email: userController.text.trim(),
+                              password: passController.text.trim(),
+                            ),
+                          );
+                        } else {
+                          // Fluttertoast.showToast(
+                          //     msg: "LLene los valores de forma correcta",
+                          //     timeInSecForIosWeb: 4,
+                          //     textColor: Colors.white);
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
               ),
-              const Divider(),
-              Flexible(
-                child: GenericTextFormField(
-                  labelText: "Login_form_password",
-                  textEditingController: passController,
-                  isPasswordInput: true,
-                  validatorFunction: passwordValidator,
-                ),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
-                child: ElevatedButton(
-                  child: const Text("Login_form_validate").tr(),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      BlocProvider.of<AuthenticationBloc>(context).add(
-                        RegisterStarted(
-                          email: userController.text.trim(),
-                          password: passController.text.trim(),
-                        ),
-                      );
-                    } else {
-                      // Fluttertoast.showToast(
-                      //     msg: "LLene los valores de forma correcta",
-                      //     timeInSecForIosWeb: 4,
-                      //     textColor: Colors.white);
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
+            ),
           ),
         ),
       ),
