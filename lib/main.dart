@@ -11,6 +11,7 @@ import 'features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'features/stray_dog/domain/usecases/get_stray_dogs.dart';
 import 'features/stray_dog/presentation/bloc/stray_dog_bloc.dart';
 import 'features/user_preferences/presentation/bloc/user_preferences_bloc.dart';
+import 'package:perros_sos/features/map/presentation/bloc/map_bloc.dart';
 import 'firebase_options.dart';
 import 'injection_container.dart';
 
@@ -24,7 +25,7 @@ Future main() async {
   //Config de diccionario
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  //Confi de GoRouter
+  //Config de GoRouter
   GoRouter.optionURLReflectsImperativeAPIs = true;
   //Config de firebase
   await Firebase.initializeApp(
@@ -58,6 +59,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserPreferencesBloc>(
           create: (context) => UserPreferencesBloc(),
         ),
+        BlocProvider<MapBloc>(
+          create: (context) => MapBloc(),
+        ),
       ],
       child: MaterialApp.router(
         locale: context.locale,
@@ -68,7 +72,6 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.grey.shade100),
         routerConfig: Routes.getroutes,
       ),
-      // ),
     );
   }
 }

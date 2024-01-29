@@ -35,4 +35,10 @@ class StrayDogRepositoryImplementation implements StrayDogRepository {
     // TODO: implement getOneStrayDog
     throw UnimplementedError();
   }
+  ///Retorna mensajes al entregar un parametro de tipo [DioException]
+  handlerDioError({required DioException dioException}) {
+
+    
+
+  }
 }

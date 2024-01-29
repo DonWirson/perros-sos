@@ -16,7 +16,14 @@ class GenericAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     void navigateToSettings() => context.pushNamed("settings");
     return AppBar(
-      title: title != null ? Text("$title") : null,
+      title: title != null
+          ? Text(
+              "$title",
+            )
+          : null,
+      centerTitle: true,
+      backgroundColor: Colors.white,
+      toolbarHeight: 40,
       //muestra backbutton en caso de ser posible hacer pop
       leading: context.canPop()
           ? IconButton(

@@ -74,7 +74,7 @@ android {
            signingConfig signingConfigs.release
        }
    }
-    namespace 'com.example.perros_sos'
+    namespace "com.donwirson.perros_sos"
 }
 
 flutter {
@@ -84,4 +84,5 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-auth-ktx:22.1.2'
+    implementation("com.mapbox.maps:android:11.1.0")
 }

@@ -7,6 +7,6 @@ abstract class MapEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GotInitialUserPosition extends MapEvent {
-  
-}
+class CheckedLocationPermission extends MapEvent {}
+
+class GotUserInitialPosition extends MapEvent {}
