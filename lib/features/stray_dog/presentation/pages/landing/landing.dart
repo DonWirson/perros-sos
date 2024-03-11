@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../config/routes/routes.dart';
 import '../../../../../core/utils/loading_progress_indicator.dart';
+import '../../../../../core/utils/widgets/generic_app_bar.dart';
 import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../../user_preferences/presentation/bloc/user_preferences_bloc.dart';
-import '../../../../map/presentation/pages/landing_map_page.dart';
 import '../settings/landing_settings_page.dart';
 import '../stray_dog/landing_stray_dog_page.dart';
 
@@ -70,7 +70,7 @@ class _LandingPageState extends State<LandingPage> {
                 //Primera Vista
                 LandingStrayDog(),
                 //Segunda Vista
-                LandingMap(),
+                LandingPage(),
                 //Tercera vista
                 Landingsettings(),
               ],

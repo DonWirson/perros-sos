@@ -48,7 +48,7 @@ dependencies:
   google_sign_in: ^6.1.5
   http: ^1.1.0
   ionicons: ^0.2.2
-  mapbox_gl: ^0.16.0
+  # mapbox_gl: ^0.16.0
   permission_handler: ^11.1.0
   retrofit: ^4.0.3
 

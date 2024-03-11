@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perros_sos/core/utils/loading_progress_indicator.dart';
 import 'package:perros_sos/features/map/presentation/bloc/map_bloc.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
 
 class LandingMap extends StatefulWidget {
   const LandingMap({super.key});
@@ -47,7 +46,7 @@ class _LandingMapState extends State<LandingMap> {
         }
         //Agregar mapa acá
         return permissionMessage == null
-            ? Center()
+            ? const Center()
             : Center(
                 child: Text(permissionMessage!),
               );

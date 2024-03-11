@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 
 ///Generic FormField, requires for label to be in dictionary(es-cl/en-us)
 class GenericTextFormField extends StatefulWidget {
-  const GenericTextFormField(
-      {super.key,
-      required this.textEditingController,
-      required this.labelText,
-      required this.validatorFunction,
-      this.isPasswordInput = false});
+  const GenericTextFormField({
+    super.key,
+    required this.textEditingController,
+    required this.labelText,
+    required this.validatorFunction,
+    this.hintText,
+    this.isPasswordInput = false,
+  });
 
   final TextEditingController textEditingController;
   final String labelText;
+  final String? hintText;
   final String? Function(String?)? validatorFunction;
   final bool isPasswordInput;
 
   @override
-  State<GenericTextFormField> createState() => _GenericTextFormFieldState();
+  State<GenericTextFormField> createState() =>
+      _GenericTextFormFieldState();
 }
 
 class _GenericTextFormFieldState extends State<GenericTextFormField> {
@@ -26,10 +30,6 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
     bool isThisInputPassword = widget.isPasswordInput;
     return Row(
       children: [
-        SizedBox(
-          width: 100,
-          child: Text(widget.labelText).tr(),
-        ),
         Expanded(
           flex: 4,
           child: TextFormField(
@@ -39,12 +39,18 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
             autocorrect: !isThisInputPassword,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: widget.validatorFunction,
+            decoration: InputDecoration(
+              labelText: widget.labelText.tr(),
+              hintText: widget.hintText?.tr(),
+            ),
           ),
         ),
+        //Agrega espacio para que input quede igual al que es password
+        if (!isThisInputPassword) const Spacer(),
         if (isThisInputPassword)
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 0),
               child: InkWell(
                 child: obscurePassword
                     ? const Icon(

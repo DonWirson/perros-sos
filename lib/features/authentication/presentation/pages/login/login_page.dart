@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../../core/utils/loading_progress_indicator.dart';
 import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../bloc/authentication_bloc.dart';
-import '../../bloc/widgets/login_form.dart';
+import '../../bloc/widgets/login_page/login_background.dart';
+import '../../bloc/widgets/login_page/login_form.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,15 +31,14 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       builder: (context, state) {
-        if (state is IsNotLoggedIn) {
-          return GenericScaffold(
-            showAppBar: true,
-            showBottomBar: false,
-            title: "Login",
-            bodyWidget: LoginForm(),
-          );
-        }
-        return const LoadingProgressIndicator();
+        return GenericScaffold(
+          showAppBar: false,
+          showBottomBar: false,
+          title: "Login",
+          bodyWidget: LoginBackground(
+            stackBody: LoginForm(),
+          ),
+        );
       },
     );
   }
