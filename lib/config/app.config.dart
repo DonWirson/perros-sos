@@ -8,5 +8,4 @@ class AppConfig {
 
   AppConfig._internal();
 
-  static String strayDogUrl = dotenv.env['STRAY_DOG_URL']!;
 }

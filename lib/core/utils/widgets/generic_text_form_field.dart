@@ -19,8 +19,7 @@ class GenericTextFormField extends StatefulWidget {
   final bool isPasswordInput;
 
   @override
-  State<GenericTextFormField> createState() =>
-      _GenericTextFormFieldState();
+  State<GenericTextFormField> createState() => _GenericTextFormFieldState();
 }
 
 class _GenericTextFormFieldState extends State<GenericTextFormField> {
@@ -31,10 +30,9 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
     return Row(
       children: [
         Expanded(
-          flex: 4,
           child: TextFormField(
             controller: widget.textEditingController,
-            obscureText: isThisInputPassword ? obscurePassword : false,
+            obscureText: obscurePassword,
             enableSuggestions: !isThisInputPassword,
             autocorrect: !isThisInputPassword,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -42,30 +40,22 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
             decoration: InputDecoration(
               labelText: widget.labelText.tr(),
               hintText: widget.hintText?.tr(),
+              suffixIcon: isThisInputPassword
+                  ? InkWell(
+                      child: Icon(
+                        Icons.remove_red_eye_outlined,
+                        color: obscurePassword ? Colors.black38 : null,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                        });
+                      },
+                    )
+                  : null,
             ),
           ),
         ),
-        //Agrega espacio para que input quede igual al que es password
-        if (!isThisInputPassword) const Spacer(),
-        if (isThisInputPassword)
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 0),
-              child: InkWell(
-                child: obscurePassword
-                    ? const Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.black,
-                      )
-                    : const Icon(
-                        Icons.remove_red_eye_outlined,
-                      ),
-                onTap: () {
-                  setState(() => obscurePassword = !obscurePassword);
-                },
-              ),
-            ),
-          ),
       ],
     );
   }
