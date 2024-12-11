@@ -1,14 +1,9 @@
 {
-    "title": "SOS Perros (name pending)",
-    "confirm": "confirmar",
-    "landing_title": "Selecciona tu país",
-    "login_username": "Ingresa tu usuario",
-    "login_password": "Ingresa tu contraseña",
-    "login_success": "Ingreso con éxíto",
-    "login_error": "Error al ingresar",
-    "missing_account": "¿Aún no tiene cuenta? Registrate",
-    "register_username": "Ingresa tu usuario",
-    "register_password": "Ingresa tu contraseña",
-    "register_success": "Éxito al crear cuenta",
-    "register_error": "Error al registrar cuenta"
+"Login_form_title":"Perdidog ' Inicio de sesion",
+"login_form_username":"Email o usuario",
+"Login_form_password":"Contraseña",
+"Login_form_validate":"Validar",
+"Login_form_login_success":"Inicio de sesión exitoso",
+"Login_form_login_failure":"Fallo al iniciar sesión",
+"Login_form_login_validate_failure":"Rellene los campos correctamente"
 }

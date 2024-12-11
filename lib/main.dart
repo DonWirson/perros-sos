@@ -14,7 +14,7 @@ import 'features/user_preferences/presentation/bloc/user_preferences_bloc.dart';
 import 'firebase_options.dart';
 import 'injection_container.dart';
 
-Future main() async {
+Future<void> main() async {
   //Carga de archivo .env
   await dotenv.load(fileName: ".env");
   //Inicia get-it
@@ -28,6 +28,7 @@ Future main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   //Config de firebase
   await Firebase.initializeApp(
+    name: "perros-sos",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
@@ -48,7 +49,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
-          create: (context) => AuthenticationBloc(),
+          create: (context) => AuthenticationBloc(
+            sl(),
+          ),
         ),
         BlocProvider<StrayDogBloc>(
           create: (context) => StrayDogBloc(
