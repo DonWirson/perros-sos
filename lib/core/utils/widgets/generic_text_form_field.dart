@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 
 ///Generic FormField, requires for label to be in dictionary(es-cl/en-us)
 class GenericTextFormField extends StatefulWidget {
+  final TextEditingController textEditingController;
+  final String labelText;
+  final String? hintText;
+  final String? Function(String?)? validatorFunction;
+  final bool isPasswordInput;
+
   const GenericTextFormField({
     super.key,
     required this.textEditingController,
@@ -12,18 +18,12 @@ class GenericTextFormField extends StatefulWidget {
     this.isPasswordInput = false,
   });
 
-  final TextEditingController textEditingController;
-  final String labelText;
-  final String? hintText;
-  final String? Function(String?)? validatorFunction;
-  final bool isPasswordInput;
-
   @override
   State<GenericTextFormField> createState() => _GenericTextFormFieldState();
 }
 
 class _GenericTextFormFieldState extends State<GenericTextFormField> {
-  bool obscurePassword = true;
+  bool obscurePassword = false;
   @override
   Widget build(BuildContext context) {
     bool isThisInputPassword = widget.isPasswordInput;
