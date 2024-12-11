@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../core/validators/login_validators.dart';
 
-import '../../../../../core/utils/widgets/generic_text_form_field.dart';
-import '../authentication_bloc.dart';
+import '../../../../../../core/utils/widgets/generic_text_form_field.dart';
+import '../../../../../../core/validators/login_validators.dart';
+import '../../bloc/authentication_bloc.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({
@@ -67,7 +67,7 @@ class LoginForm extends StatelessWidget {
     );
   }
 
-  void onLoginPressed(BuildContext context) {
+  Future<void> onLoginPressed(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       BlocProvider.of<AuthenticationBloc>(context).add(
         LoginStarted(
