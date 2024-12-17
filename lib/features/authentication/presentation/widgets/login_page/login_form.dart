@@ -24,11 +24,11 @@ class LoginForm extends StatelessWidget {
       child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           if (state is LoginSuccessful) {
-            print("YIPIEEEEEEEEE");
+            context.goNamed("landing");
           }
         },
         builder: (context, state) {
-          if (state is LoginInProgress) {
+          if (state is LoginInProgress || state is LoginSuccessful) {
             return const LoadingProgressIndicator();
           }
           return Form(
