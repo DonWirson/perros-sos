@@ -1,3 +1,6 @@
+import '../../domain/entities/jwt_token.dart';
+import '../../domain/usecases/login_user.dart';
+
 import '../../../../core/api/api_client_interface.dart';
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/enum/method_type_enum.dart';
@@ -24,6 +27,22 @@ class AuthService {
       path: "$endpointUrl/Register",
       method: MethodType.post,
       payload: headers,
+    );
+
+    return response;
+  }
+
+  Future<ApiResponse<JwtToken>> loginUser(LoginUserUseCaseParams params) async {
+    Map<String, dynamic> headers = {
+      "username": params.username,
+      "password": params.password,
+    };
+
+    final response = await apiClient.request<JwtToken>(
+      path: "$endpointUrl/Login",
+      method: MethodType.post,
+      payload: headers,
+      fromJson: (json) => JwtToken.fromMap(json),
     );
 
     return response;

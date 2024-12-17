@@ -6,6 +6,7 @@ import 'core/api/dio_client.dart';
 import 'features/authentication/data/datasources/auth_service.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
+import 'features/authentication/domain/usecases/login_user.dart';
 import 'features/authentication/domain/usecases/register_user.dart';
 import 'features/stray_dog/data/datasources/remote/stray_dog_api_service.dart';
 import 'features/stray_dog/data/repositories/stray_dog_repository_impl.dart';
@@ -44,11 +45,18 @@ Future<void> initializeDependencies() async {
     ),
   );
   //Use cases
+  //AUTH
   sl.registerSingleton<RegisterUserUseCase>(
     RegisterUserUseCase(
       authRepository: sl(),
     ),
   );
+  sl.registerSingleton<LoginUserUseCase>(
+    LoginUserUseCase(
+      authRepository: sl(),
+    ),
+  );
+
   sl.registerSingleton<GetStrayDogsUseCase>(
     GetStrayDogsUseCase(
       sl(),

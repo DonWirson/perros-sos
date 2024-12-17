@@ -89,7 +89,7 @@ class DioClient implements ApiClient {
           break;
       }
       apiResponse = ApiResponse(
-        data: fromJson == null ? response.data : fromJson.call(response.data),
+        data: fromJson == null ? response.data : fromJson(response.data),
         statusCode: response.statusCode,
         success: true,
         statusMessage: response.statusMessage,

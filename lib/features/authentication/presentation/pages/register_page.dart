@@ -24,6 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
       bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {},
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: double.infinity,
           decoration: BoxDecoration(
             gradient: Gradients.registerGradient(),
           ),

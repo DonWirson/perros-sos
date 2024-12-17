@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import '../../domain/entities/jwt_token.dart';
+import '../../domain/usecases/login_user.dart';
 
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/data_state/failure.dart';
@@ -18,6 +20,21 @@ class AuthRepositoryImpl implements AuthRepository {
       RegisterUserUseCaseParams useCaseParams) async {
     try {
       final apiResponse = await _authService.registerUser(useCaseParams);
+
+      return right(apiResponse);
+    } catch (e) {
+      return Left(
+        Failure(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, ApiResponse<JwtToken>>> loginUser(LoginUserUseCaseParams useCaseParams) async {
+    try {
+      final apiResponse = await _authService.loginUser(useCaseParams);
 
       return right(apiResponse);
     } catch (e) {

@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../extension/font_extension.dart';
+
 ///Generic FormField, requires for label to be in dictionary(es-cl/en-us)
 class GenericTextFormField extends StatefulWidget {
   final TextEditingController textEditingController;
@@ -39,7 +41,9 @@ class _GenericTextFormFieldState extends State<GenericTextFormField> {
             validator: widget.validatorFunction,
             decoration: InputDecoration(
               labelText: widget.labelText.tr(),
+              labelStyle: Theme.of(context).textTheme.labelText,
               hintText: widget.hintText?.tr(),
+              hintStyle: Theme.of(context).textTheme.hintText,
               suffixIcon: isThisInputPassword
                   ? InkWell(
                       child: Icon(

@@ -19,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
       showBottomBar: false,
       title: "Login_form_title",
       bodyWidget: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: Gradients.loginGradient(),
         ),

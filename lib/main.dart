@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthenticationBloc>(
           create: (context) => AuthenticationBloc(
             sl(),
+            sl(),
           ),
         ),
         BlocProvider<StrayDogBloc>(

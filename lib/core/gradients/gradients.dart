@@ -14,7 +14,7 @@ class Gradients {
       ],
     );
   }
-
+  //Change this gradient to something green?
   static LinearGradient registerGradient() {
     return LinearGradient(
       begin: Alignment.topRight,
