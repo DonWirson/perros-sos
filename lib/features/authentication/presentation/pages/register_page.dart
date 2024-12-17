@@ -21,16 +21,13 @@ class _RegisterPageState extends State<RegisterPage> {
       showAppBar: false,
       showBottomBar: false,
       title: "register_page".tr(),
-      bodyWidget: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {},
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: Gradients.registerGradient(),
-          ),
-          child: RegisterForm(),
+      bodyWidget: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: Gradients.registerGradient(),
         ),
+        child: RegisterForm(),
       ),
     );
   }

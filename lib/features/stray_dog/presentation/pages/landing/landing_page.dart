@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../core/gradients/gradients.dart';
 
 import '../../../../../config/routes/routes.dart';
 import '../../../../../core/utils/loading_progress_indicator.dart';
@@ -8,20 +9,21 @@ import '../../../../../core/utils/widgets/generic_app_bar.dart';
 import '../../../../../core/utils/widgets/generic_scaffold.dart';
 import '../../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../../user_preferences/presentation/bloc/user_preferences_bloc.dart';
-import '../map/landing_map_page.dart';
-import '../settings/landing_settings_page.dart';
 import '../stray_dog/landing_stray_dog_page.dart';
+import 'map_page.dart';
+import 'settings_page.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage(
-      {this.title,
-      this.showAppBar = true,
-      this.showBottomBar = false,
-      super.key});
-
   final String? title;
   final bool showBottomBar;
   final bool showAppBar;
+
+  const LandingPage({
+    this.title,
+    this.showAppBar = true,
+    this.showBottomBar = false,
+    super.key,
+  });
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -29,22 +31,32 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   @override
+  void initState() {
+    BlocProvider.of<AuthenticationBloc>(context).add(
+      CheckedLoggedIn(),
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var bloc = BlocProvider.of<UserPreferencesBloc>(context);
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        //En caso de cerrar sesión por medio de la app o de forma externa.
         if (state is IsNotLoggedIn) {
           context.pushReplacementNamed("login");
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No esta actualmente logeado :C'),
-              duration: Duration(seconds: 10),
-            ),
-          );
-        }      },
+        }
+      },
       builder: (context, state) {
-        if(state is LoginInProgress){
-          return const LoadingProgressIndicator();
+        if (state is CheckedLoggedInProgress || state is IsNotLoggedIn) {
+          return Container(
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: Gradients.loadingGradient(),
+            ),
+            child: const LoadingProgressIndicator(),
+          );
         }
         return GenericScaffold(
           showAppBar: true,
@@ -55,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
                 )
               : null,
           bodyWidget: IndexedStack(
-            index: BlocProvider.of<UserPreferencesBloc>(context).currentIndex,
+            index: bloc.currentIndex,
             children: const [
               LandingStrayDog(),
               LandingMap(),
@@ -64,14 +76,12 @@ class _LandingPageState extends State<LandingPage> {
           ),
           bottomBarWidget: BottomNavigationBar(
             items: Routes.bottomBarItems,
-            currentIndex:
-                BlocProvider.of<UserPreferencesBloc>(context).currentIndex,
+            currentIndex: bloc.currentIndex,
             selectedItemColor: const Color.fromARGB(158, 255, 145, 0),
             onTap: (currentIndex) {
               setState(
                 () {
-                  BlocProvider.of<UserPreferencesBloc>(context).currentIndex =
-                      currentIndex;
+                  bloc.currentIndex = currentIndex;
                 },
               );
             },

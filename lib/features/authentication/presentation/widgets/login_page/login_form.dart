@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../core/utils/loading_progress_indicator.dart';
 
 import '../../../../../../core/utils/widgets/generic_text_form_field.dart';
 import '../../../../../../core/validators/login_validators.dart';
 import '../../../../../core/extension/font_extension.dart';
+import '../../../../../core/utils/loading_progress_indicator.dart';
 import '../../bloc/authentication_bloc.dart';
 
 class LoginForm extends StatelessWidget {

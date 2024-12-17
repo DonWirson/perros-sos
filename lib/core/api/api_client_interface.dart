@@ -12,5 +12,6 @@ abstract class ApiClient {
 
   void setToken(String token);
   void removeToken();
+  Future<String?> getLocalToken();
   String handleException(Exception exception);
 }

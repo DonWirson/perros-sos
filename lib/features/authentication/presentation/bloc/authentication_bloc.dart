@@ -15,9 +15,6 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  late Stream<User?> userStream;
-  late StreamSubscription<User?> userStateStreamListener;
-
   final RegisterUserUseCase _registerUserUseCase;
   final LoginUserUseCase _loginUserUseCase;
 
@@ -29,8 +26,6 @@ class AuthenticationBloc
     on<LoginStarted>(_loginStarted);
     on<RegisterStarted>(_registerStarted);
     on<CheckedLoggedIn>(_checkedLoggedIn);
-    on<OpenedSession>(_openedSession);
-    on<ClosedSession>(_closedSession);
   }
 
   Future<void> _registerStarted(
@@ -88,70 +83,24 @@ class AuthenticationBloc
     );
   }
 
-  Future<void> _openedSession(
-      OpenedSession event, Emitter<AuthenticationState> emit) async {
-    try {
-      emit(
-        LoginInProgress(),
-      );
-      await Future.delayed(
-        const Duration(seconds: 2),
-      );
-      emit(
-        IsLoggedIn(),
-      );
-    } catch (e) {
-      emit(
-        IsLoggedIn(),
-      );
-    }
-  }
-
-  Future<void> _closedSession(
-      ClosedSession event, Emitter<AuthenticationState> emit) async {
-    try {
-      emit(
-        LoginInProgress(),
-      );
-      await Future.delayed(
-        const Duration(seconds: 2),
-      );
-      emit(
-        IsNotLoggedIn(),
-      );
-    } catch (e) {
-      log(
-        e.toString(),
-      );
-      emit(
-        IsNotLoggedIn(),
-      );
-    }
-  }
-
   Future<void> _checkedLoggedIn(
       CheckedLoggedIn event, Emitter<AuthenticationState> emit) async {
     emit(
-      LoginInProgress(),
+      CheckedLoggedInProgress(),
     );
     await Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
     );
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        //Dispara evento que cierra sesión
-        add(
-          ClosedSession(),
-        );
-      } else {
-        add(
-          OpenedSession(),
-        );
-      }
-    } catch (e) {
+    final localToken = await sl<ApiClient>().getLocalToken();
+    if (localToken == null) {
+      //Usuario no esta logeado >:D
       emit(
         IsNotLoggedIn(),
+      );
+      //Usuario esta Logeado
+    } else {
+      emit(
+        IsLoggedIn(),
       );
     }
   }

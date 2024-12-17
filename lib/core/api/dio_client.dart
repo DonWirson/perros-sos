@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data_state/data_state.dart';
 import '../enum/method_type_enum.dart';
@@ -10,13 +11,7 @@ import 'api_client_interface.dart';
 class DioClient implements ApiClient {
   late Dio _client;
 
-  DioClient()
-  // : assert(
-  //     //Stop the app in case env is not initialized
-  //     dotenv.env['BASE_API_URL'] == null,
-  //     "BASE_API_URL MUST NOT BE NULL!",
-  //   )
-  {
+  DioClient() {
     final baseApiUrl = dotenv.env['BASE_API_URL'];
 
     _client = Dio()..options.baseUrl = baseApiUrl ?? "";
@@ -35,9 +30,30 @@ class DioClient implements ApiClient {
     _client.options.headers.remove('Authorization');
   }
 
+  ///Save token locally and applies it to the header of the api calls
   @override
   void setToken(String token) {
     _client.options.headers['Authorization'] = 'Bearer $token';
+    //Save jwtToken to localStorage, later used to validate if user is logged in
+    setLocalToken(token);
+  }
+
+  @override
+  String handleException(Exception exception) {
+    // TODO: implement handleException
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String?> getLocalToken() async {
+    const storage = FlutterSecureStorage();
+
+    return await storage.read(key: "jwtToken");
+  }
+
+  setLocalToken(String jwtToken) async {
+    const storage = FlutterSecureStorage();
+    await storage.write(key: "jwtToken", value: jwtToken);
   }
 
   @override
@@ -108,11 +124,5 @@ class DioClient implements ApiClient {
       );
     }
     return apiResponse;
-  }
-
-  @override
-  String handleException(Exception exception) {
-    // TODO: implement handleException
-    throw UnimplementedError();
   }
 }

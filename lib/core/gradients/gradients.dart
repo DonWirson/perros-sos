@@ -14,6 +14,7 @@ class Gradients {
       ],
     );
   }
+
   //Change this gradient to something green?
   static LinearGradient registerGradient() {
     return LinearGradient(
@@ -25,6 +26,21 @@ class Gradients {
         Colors.blue[100]!,
         Colors.blue[200]!,
         Colors.blue[300]!
+      ],
+    );
+  }
+
+  ///Used in the loading Spinner.
+  static LinearGradient loadingGradient() {
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomCenter,
+      stops: const [0.2, 0.5, 0.8, 0.7],
+      colors: [
+        Colors.blue[50]!,
+        Colors.lightGreen[100]!,
+        Colors.lightGreen[200]!,
+        Colors.lightGreen[300]!
       ],
     );
   }
