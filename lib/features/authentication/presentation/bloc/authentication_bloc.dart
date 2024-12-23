@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/api/api_client_interface.dart';
 import '../../../../injection_container.dart';
@@ -37,7 +35,7 @@ class AuthenticationBloc
     );
 
     final apiResponse = await _registerUserUseCase(
-      params: RegisterUserUseCaseParams(
+      params: RegisterRequestDto(
         username: event.email,
         password: event.password,
         roles: event.roles,
@@ -61,7 +59,7 @@ class AuthenticationBloc
     emit(LoginInProgress());
 
     final apiResponse = await _loginUserUseCase(
-      params: LoginUserUseCaseParams(
+      params: LoginRequestDto(
         username: event.email,
         password: event.password,
       ),
@@ -88,9 +86,11 @@ class AuthenticationBloc
     emit(
       CheckedLoggedInProgress(),
     );
+
     await Future.delayed(
       const Duration(seconds: 1),
     );
+
     final localToken = await sl<ApiClient>().getLocalToken();
     if (localToken == null) {
       //Usuario no esta logeado >:D

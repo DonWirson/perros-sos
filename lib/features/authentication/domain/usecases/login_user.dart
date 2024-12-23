@@ -8,8 +8,7 @@ import 'package:perros_sos/features/authentication/domain/repositories/auth_repo
 
 class LoginUserUseCase
     implements
-        UseCase<Either<Failure, ApiResponse<JwtToken>>,
-            LoginUserUseCaseParams> {
+        UseCase<Either<Failure, ApiResponse<JwtToken>>, LoginRequestDto> {
   final AuthRepository authRepository;
 
   LoginUserUseCase({
@@ -18,16 +17,16 @@ class LoginUserUseCase
 
   @override
   Future<Either<Failure, ApiResponse<JwtToken>>> call(
-      {required LoginUserUseCaseParams params}) {
+      {required LoginRequestDto params}) {
     return authRepository.loginUser(params);
   }
 }
 
-class LoginUserUseCaseParams {
+class LoginRequestDto {
   String username;
   String password;
 
-  LoginUserUseCaseParams({
+  LoginRequestDto({
     required this.username,
     required this.password,
   });

@@ -14,8 +14,7 @@ class AuthService {
 
   final endpointUrl = '/Auth';
 
-  Future<ApiResponse<bool>> registerUser(
-      RegisterUserUseCaseParams params) async {
+  Future<ApiResponse<bool>> registerUser(RegisterRequestDto params) async {
     Map<String, dynamic> headers = {
       "username": params.username,
       "password": params.password,
@@ -31,7 +30,7 @@ class AuthService {
     return response;
   }
 
-  Future<ApiResponse<JwtToken>> loginUser(LoginUserUseCaseParams params) async {
+  Future<ApiResponse<JwtToken>> loginUser(LoginRequestDto params) async {
     Map<String, dynamic> headers = {
       "username": params.username,
       "password": params.password,

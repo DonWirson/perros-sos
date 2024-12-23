@@ -8,8 +8,8 @@ import '../usecases/register_user.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, ApiResponse<bool>>> registerUser(
-      RegisterUserUseCaseParams useCaseParams);
+      RegisterRequestDto useCaseParams);
 
   Future<Either<Failure, ApiResponse<JwtToken>>> loginUser(
-      LoginUserUseCaseParams useCaseParams);
+      LoginRequestDto useCaseParams);
 }

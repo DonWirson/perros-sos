@@ -10,6 +10,7 @@ class GenericTextFormField extends StatefulWidget {
   final String? hintText;
   final String? Function(String?)? validatorFunction;
   final bool isPasswordInput;
+  
 
   const GenericTextFormField({
     super.key,

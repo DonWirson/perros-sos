@@ -17,7 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, ApiResponse<bool>>> registerUser(
-      RegisterUserUseCaseParams useCaseParams) async {
+      RegisterRequestDto useCaseParams) async {
     try {
       final apiResponse = await _authService.registerUser(useCaseParams);
 
@@ -32,7 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, ApiResponse<JwtToken>>> loginUser(LoginUserUseCaseParams useCaseParams) async {
+  Future<Either<Failure, ApiResponse<JwtToken>>> loginUser(
+      LoginRequestDto useCaseParams) async {
     try {
       final apiResponse = await _authService.loginUser(useCaseParams);
 
