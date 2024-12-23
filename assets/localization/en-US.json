@@ -1,14 +1,9 @@
 {
-    "title": "SOS Dogs (name pending)",
-    "confirm": "confirm",
-    "landing_title": "title",
-    "login_username": "Enter your username",
-    "login_password": "Enter your password",
-    "login_success": "Successful login",
-    "login_error": "Login error",
-    "missing_account": "Don't have an account yet? Sign up",
-    "register_username": "Enter your username",
-    "register_password": "Enter your password",
-    "register_success": "Created account successfully",
-    "register_error": "Error creating account"
+"Login_form_title":"Perdidog - Log in",
+"login_form_username":"Email or username",
+"Login_form_password":"Password",
+"Login_form_validate":"Validate",
+"Login_form_login_success":"Successful log in",
+"Login_form_login_failure":"Failed to log in",
+"Login_form_login_validate_failure":"Please fill in the fields correctly"
 }

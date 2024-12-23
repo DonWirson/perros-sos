@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/authentication/presentation/pages/login/login_page.dart';
-import '../../features/authentication/presentation/pages/register/register_page.dart';
-import '../../features/stray_dog/presentation/pages/landing/landing.dart';
+import '../../features/authentication/presentation/pages/login_page.dart';
+import '../../features/authentication/presentation/pages/register_page.dart';
+import '../../features/stray_dog/presentation/pages/landing/landing_page.dart';
 
 enum Routes {
   landing(
@@ -47,7 +47,7 @@ enum Routes {
 
   static GoRouter get getroutes {
     return GoRouter(
-      initialLocation: "/login",
+      initialLocation: "/",
       routes: Routes.values
           .map((route) => GoRoute(
                 path: route.path,

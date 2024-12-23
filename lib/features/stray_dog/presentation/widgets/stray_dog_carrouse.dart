@@ -19,9 +19,9 @@ class _StrayDogsCarrouselState extends State<StrayDogsCarrousel> {
   void initState() {
     super.initState();
     //Dispara evento que busca ultimos reportados
-    BlocProvider.of<StrayDogBloc>(context).add(
-      GotAllStrayDogs(),
-    );
+    // BlocProvider.of<StrayDogBloc>(context).add(
+    //   GotAllStrayDogs(),
+    // );
   }
 
   @override

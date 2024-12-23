@@ -30,8 +30,6 @@ class GenericScaffold extends StatelessWidget {
                 title: title,
               ))
           : null,
-      backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      //bodyWidget cambia por cada PAGE
       body: bodyWidget,
       bottomNavigationBar:
           showBottomBar ? (bottomBarWidget ?? const GenericBottomBar()) : null,
