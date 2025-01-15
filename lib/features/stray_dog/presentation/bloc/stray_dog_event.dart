@@ -7,11 +7,11 @@ abstract class StrayDogEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class GotAllStrayDogs extends StrayDogEvent {}
+final class GotAllLostPets extends StrayDogEvent {}
 
 final class CreatedStrayDogReport extends StrayDogEvent {
-  final StrayDogModel strayDogModel;
-  const CreatedStrayDogReport({required this.strayDogModel});
+  final LostPet lostPet;
+  const CreatedStrayDogReport({required this.lostPet});
   @override
   List<Object> get props => [];
 }

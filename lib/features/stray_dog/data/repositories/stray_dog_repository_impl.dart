@@ -1,37 +1,21 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
-
-import '../../../../core/resources/data_state.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../domain/entities/lost_pet.dart';
 import '../../domain/repositories/stray_dog_repository.dart';
 import '../datasources/remote/stray_dog_api_service.dart';
-import '../models/stray_dog_model.dart';
 
-class StrayDogRepositoryImplementation implements StrayDogRepository {
-  final StrayDogApiService _strayDogApiService;
+class StrayDogRepositoryImpl implements StrayDogRepository {
+  final StrayDogApiService _strayDogService;
 
-  StrayDogRepositoryImplementation(this._strayDogApiService);
+  StrayDogRepositoryImpl(this._strayDogService);
+
   @override
-  Future<DataState<List<StrayDogModel>>> getAllStrayDogs() async {
-    try {
-      final httpResponse = await _strayDogApiService.getAllStrayDogs();
-      if (httpResponse.response.statusCode != HttpStatus.ok) {
-        return DataFailed(
-          DioException.badResponse(
-            statusCode: httpResponse.response.statusCode ?? 404,
-            requestOptions: RequestOptions(),
-            response: httpResponse.response,
-          ),
-        );
-      }
-      return DataSuccess<List<StrayDogModel>>(httpResponse.data);
-    } on DioException catch (exception) {
-      return DataFailed(exception);
-    }
+  Future<ApiResponse<List<LostPet>>> getAllStrayDogs() async {
+    final apiResponse = await _strayDogService.getAllStrayDogs();
+    return apiResponse;
   }
 
   @override
-  Future<DataState<StrayDogModel>> getOneStrayDog({required String endPoint}) {
+  Future<ApiResponse<LostPet>> getOneStrayDog({required int id}) {
     // TODO: implement getOneStrayDog
     throw UnimplementedError();
   }

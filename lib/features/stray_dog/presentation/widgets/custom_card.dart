@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../../data/models/stray_dog_model.dart';
+import '../../domain/entities/lost_pet_entities.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
-    required this.strayDogModel,
+    required this.lostPet,
     super.key,
   });
-  final StrayDogModel strayDogModel;
+  final LostPet lostPet;
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +16,15 @@ class CustomCard extends StatelessWidget {
           right: 10,
           child: Text(
             substractHour(
-              strayDogModel.reportDate.toString(),
+              lostPet.reportDate.toString(),
             ),
           ),
         ),
         Positioned(
           top: 20,
           left: 15,
-          child: strayDogModel.photoUrl == null
+          // child: lostPet.photoUrl == null
+          child: true
               ? Image.asset(
                   "assets/images/cute_dog.jpg",
                   fit: BoxFit.fitHeight,
@@ -36,12 +36,13 @@ class CustomCard extends StatelessWidget {
                   height: 100,
                 ),
         ),
-        Align(
+        const Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
             child: Text(
-              strayDogModel.address ?? "",
+              // lostPet.address ?? "",
+              "",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,

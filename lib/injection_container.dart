@@ -22,7 +22,7 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<StrayDogApiService>(
     StrayDogApiService(
-      sl(),
+      apiClient: sl(),
     ),
   );
 
@@ -40,7 +40,7 @@ Future<void> initializeDependencies() async {
     ),
   );
   sl.registerSingleton<StrayDogRepository>(
-    StrayDogRepositoryImplementation(
+    StrayDogRepositoryImpl(
       sl(),
     ),
   );
@@ -57,8 +57,8 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  sl.registerSingleton<GetStrayDogsUseCase>(
-    GetStrayDogsUseCase(
+  sl.registerSingleton<GetLostPetsUseCase>(
+    GetLostPetsUseCase(
       sl(),
     ),
   );

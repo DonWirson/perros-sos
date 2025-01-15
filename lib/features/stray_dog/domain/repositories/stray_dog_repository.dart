@@ -1,7 +1,7 @@
-import '../../../../core/resources/data_state.dart';
-import '../entities/stray_dog.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../entities/lost_pet_entities.dart';
 
 abstract class StrayDogRepository {
-  Future<DataState<List<StrayDogEntity>>> getAllStrayDogs();
-  Future<DataState<StrayDogEntity>> getOneStrayDog({required String endPoint});
+  Future<ApiResponse<List<LostPet>>> getAllStrayDogs();
+  Future<ApiResponse<LostPet>> getOneStrayDog({required int id});
 }
