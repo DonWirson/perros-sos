@@ -49,6 +49,7 @@ dependencies:
   google_sign_in: ^6.1.5
   http: ^1.1.0
   ionicons: ^0.2.2
+  json_annotation: ^4.9.0
   retrofit: ^4.0.3
 
 dev_dependencies:
@@ -56,7 +57,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.7.1
+  json_serializable: ^6.7.0
   rename: ^3.0.1
   retrofit_generator: ^8.0.3
 
