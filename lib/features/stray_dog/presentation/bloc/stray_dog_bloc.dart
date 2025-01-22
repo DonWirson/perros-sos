@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/lost_pet.dart';
@@ -26,18 +25,15 @@ class StrayDogBloc extends Bloc<StrayDogEvent, StrayDogState> {
       final apiResponse = await getLostPetsUseCase();
       if (apiResponse.success) {
         emit(
-          GotAllLostPetsSuccess(strayDogs: apiResponse.data!),
+          GotAllLostPetsSuccess(lostPets: apiResponse.data!),
         );
-      } else {}
-      // if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
-      //   emit(
-      //     GotAllLostPetsSuccess(dataState.data as List<LostPet>),
-      //   );
-      // }
-    } on DioException catch (e) {
-      // emit(
-      //   GotAllLostPetsFailure(e),
-      // );
-    }
+      } else {
+        emit(
+          GotAllLostPetsFailure(
+            error: apiResponse.statusMessage ?? "Error",
+          ),
+        );
+      }
+    } catch (e) {}
   }
 }

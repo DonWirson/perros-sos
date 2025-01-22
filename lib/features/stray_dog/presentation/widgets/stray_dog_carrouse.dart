@@ -30,7 +30,7 @@ class _StrayDogsCarrouselState extends State<StrayDogsCarrousel> {
       listener: (context, state) {
         if (state is GotAllLostPetsSuccess) {
           setState(() {
-            strayDogsModel = state.strayDogs;
+            strayDogsModel = state.lostPets;
           });
         }
         // if (state is GotAllLostPetsFailure) {
@@ -72,6 +72,7 @@ class _StrayDogsCarrouselState extends State<StrayDogsCarrousel> {
                     ),
                   ),
                   child: CustomCard(
+                    context: context,
                     lostPet: strayDogsModel[index],
                   ),
                 );

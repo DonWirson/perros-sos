@@ -10,19 +10,24 @@ final class StrayDogInitial extends StrayDogState {}
 final class GotAllLostPetsInProgress extends StrayDogState {}
 
 final class GotAllLostPetsSuccess extends StrayDogState {
-  final List<LostPet> strayDogs;
+  final List<LostPet> lostPets;
 
   GotAllLostPetsSuccess({
-    required this.strayDogs,
+    required this.lostPets,
   });
   @override
-  List<Object> get props => strayDogs;
+  List<Object> get props => lostPets;
 }
 
-// final class GotAllLostPetsFailure extends StrayDogState {
-//   DioException error;
-//   const GotAllLostPetsFailure(DioException error) : super(error: error);
-// }
+final class GotAllLostPetsFailure extends StrayDogState {
+  final String error;
+
+  GotAllLostPetsFailure({
+    required this.error,
+  });
+  @override
+  List<Object> get props => [error];
+}
 
 // final class CreatedStrayDogState extends StrayDogState {}
 
