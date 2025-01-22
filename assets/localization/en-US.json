@@ -5,5 +5,12 @@
 "Login_form_validate":"Validate",
 "Login_form_login_success":"Successful log in",
 "Login_form_login_failure":"Failed to log in",
-"Login_form_login_validate_failure":"Please fill in the fields correctly"
+"Login_form_login_validate_failure":"Please fill in the fields correctly",
+"Day-monday":"Monday",
+"Day-tuesday":"Tuesday",
+"Day-wednesday":"Wednesday",
+"Day-thursday":"Thurdsday",
+"Day-friday":"Friday",
+"Day-saturday":"Saturday",
+"Day-sunday":"Sunday"
 }

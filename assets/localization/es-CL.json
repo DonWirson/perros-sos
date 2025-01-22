@@ -5,5 +5,12 @@
 "Login_form_validate":"Validar",
 "Login_form_login_success":"Inicio de sesión exitoso",
 "Login_form_login_failure":"Fallo al iniciar sesión",
-"Login_form_login_validate_failure":"Rellene los campos correctamente"
+"Login_form_login_validate_failure":"Rellene los campos correctamente",
+"Day-monday":"Lunes",
+"Day-tuesday":"Martes",
+"Day-wednesday":"Miércoles",
+"Day-thursday":"Jueves",
+"Day-friday":"Viernes",
+"Day-saturday":"Sábado",
+"Day-sunday":"Domingo"
 }
